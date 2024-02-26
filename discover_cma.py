@@ -40,6 +40,7 @@ def results_file(config: CMAConfig):
     results_file_name += f"_seed_{config.seed}.json"
     return results_path.joinpath(results_file_name)
 
+
 def set_seed(seed: int) -> None:
     """Set the seed for reproducibility.
     Parameters
@@ -54,6 +55,7 @@ def set_seed(seed: int) -> None:
         torch.cuda.manual_seed(seed)
         torch.cuda.manual_seed_all(seed)
 
+
 def get_device():
     """Get the device to use.
     Returns
@@ -61,7 +63,12 @@ def get_device():
     device : torch.device
         The device to use.
     """
-    return torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
+    return (
+        torch.device("mps")
+        if torch.backends.mps.is_available()
+        else torch.device("cpu")
+    )
+
 
 def save_json(d, filepath):
     """Save the dictionary to the given file path.
@@ -73,7 +80,7 @@ def save_json(d, filepath):
         The file path to save the dictionary to.
     """
     with open(filepath, "w") as f:
-        json.dump(d, f)    
+        json.dump(d, f)
 
 
 @hydra.main(config_path="configuration", config_name="cma", version_base=None)
@@ -82,14 +89,14 @@ def main(config: CMAConfig) -> None:
     device = get_device()
     log.info(f"Using device: {device}")
 
-    professions =  ProfessionsData(data_path=config.data.path, seed=config.seed)
-    train_dataloader, val_dataloader = professions.get_dataloaders(batch_size=config.data.batch_size, shuffle=True, val_split=config.data.val_size)
+    professions = ProfessionsData(data_path=config.data.path, seed=config.seed)
+    train_dataloader, val_dataloader = professions.get_dataloaders(
+        batch_size=config.data.batch_size, shuffle=True, val_split=config.data.val_size
+    )
     cma = CMA(config=config, device=device)
     indirect_effects = cma.indirect_effects(train_dataloader)
     save_json({"indirect_effects": indirect_effects.tolist()}, results_file(config))
-        
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()
-    
-    

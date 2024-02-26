@@ -1,13 +1,15 @@
 from dataclasses import dataclass
 from typing import List
 
+
 @dataclass
 class DataConfig:
     name: str
     path: str
-    workers:int
+    workers: int
     batch_size: int
     val_size: float
+
 
 @dataclass
 class CMAConfig:
@@ -16,4 +18,3 @@ class CMAConfig:
     attn_heads: int
     results_path: str
     data: DataConfig
-

@@ -1,19 +1,22 @@
 from dataclasses import dataclass
 from typing import List
 
+
 @dataclass
 class MaskConfig:
     model: str
     attn_heads: int = 0
     mlps: int = 0
 
+
 @dataclass
 class DataConfig:
     seed: int
     name: str
     path: str
-    workers:int
+    workers: int
     val_size: float
+
 
 @dataclass
 class TrainerConfig:

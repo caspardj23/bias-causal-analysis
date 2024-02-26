@@ -1,9 +1,12 @@
 import torch
 import lightning.pytorch as pl
+import os
 
-from configuration.diffmask import DiffMaskConfig 
+from configuration.diffmask import DiffMaskConfig
 
 from transformers import get_constant_schedule_with_warmup, get_constant_schedule
+
+os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
 
 class DiffMask(pl.LightningModule):
@@ -29,7 +32,6 @@ class DiffMask(pl.LightningModule):
             get_constant_schedule(optimizers[1]),
         ]
         return optimizers, schedulers
-
 
     def optimizer_step(
         self,
@@ -61,6 +63,7 @@ class DiffMask(pl.LightningModule):
                 torch.full_like(self.lambda1.data, 200),
                 self.lambda1.data,
             )
+
 
 @torch.distributions.kl.register_kl(
     torch.distributions.Bernoulli, torch.distributions.Bernoulli
