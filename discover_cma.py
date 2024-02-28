@@ -63,11 +63,7 @@ def get_device():
     device : torch.device
         The device to use.
     """
-    return (
-        torch.device("mps")
-        if torch.backends.mps.is_available()
-        else torch.device("cpu")
-    )
+    return torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
 
 
 def save_json(d, filepath):

@@ -156,11 +156,7 @@ def evaluate_save_results():
     stereo_data = "data/stereoset_dev.json"
     blimp_data = "data/blimp"
     crowspairs_data = "data/crows_pairs_revised.csv"
-    device = (
-        torch.device("mps")
-        if torch.backends.mps.is_available()
-        else torch.device("cpu")
-    )
+    device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
     model = GPT2LMHeadModel.from_pretrained("gpt2").to(device)
     tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
     model.eval()
