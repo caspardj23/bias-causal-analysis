@@ -1,3 +1,4 @@
+from google.colab import drive
 import torch
 import random
 import logging
@@ -21,6 +22,8 @@ cs = ConfigStore.instance()
 cs.store(name="cma_config", node=CMAConfig)
 log = logging.getLogger(name="main")
 
+drive.mount("/content/drive")
+
 
 def results_file(config: CMAConfig):
     """Get the results file name for the given configuration.
@@ -33,7 +36,7 @@ def results_file(config: CMAConfig):
     results_file_name : str
         The results file name.
     """
-    results_path = Path(config.results_path)
+    results_path = Path("/content/drive/My Drive/results/")
     results_path.mkdir(parents=True, exist_ok=True)
     results_file_name = f"{config.model}"
     results_file_name += f"_attn_heads_{config.attn_heads}"
