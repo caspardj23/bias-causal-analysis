@@ -1,6 +1,6 @@
 seed: 9
 
-model: yhavinga/gpt2-large-dutch
+model: gpt2-small
 attn_heads: 10
 results_path: results/cma
   
