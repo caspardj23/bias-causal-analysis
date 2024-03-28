@@ -12,8 +12,6 @@ from jaxtyping import Float, Int
 
 from transformer_lens.hook_points import HookPoint
 from transformer_lens import HookedTransformer, ActivationCache
-from transformers import GPT2Tokenizer, GPT2LMHeadModel, GPT2Config
-
 
 LOGGER = logging.getLogger(__name__)
 
@@ -56,20 +54,12 @@ def attention_intervention_hook(
 
 class CMA:
     def __init__(self, config: CMAConfig, device):
-        # self.config = config
-        # self.device = device
-        # self.model = GPT2Tokenizer.from_pretrained(config.model, device=device)
-        # self.model.cfg.use_attn_result = True
-        # self.she_token = self.model.tokenizer.encode(" she")[0]
-        # self.he_token = self.model.tokenizer.encode(" he")[0]
-        model_config = GPT2Config.from_pretrained(config.model)
-        model_config.use_attn_result = True
-        self.config = GPT2Config.from_pretrained(config.model)
+        self.config = config
         self.device = device
-        self.model = GPT2LMHeadModel(config.model)
-        # self.model.cfg.use_attn_result = True
-        self.she_token = self.model.tokenizer.encode(" zij")[0]
-        self.he_token = self.model.tokenizer.encode(" hij")[0]
+        self.model = HookedTransformer.from_pretrained(config.model, device=device)
+        self.model.cfg.use_attn_result = True
+        self.she_token = self.model.tokenizer.encode(" she")[0]
+        self.he_token = self.model.tokenizer.encode(" he")[0]
 
     def indirect_effects(self, dataloader):
         self.model.eval()
