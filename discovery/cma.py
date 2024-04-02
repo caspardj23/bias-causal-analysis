@@ -12,6 +12,15 @@ from jaxtyping import Float, Int
 
 from transformer_lens.hook_points import HookPoint
 from transformer_lens import HookedTransformer, ActivationCache
+import transformer
+
+# transformer_lens.loading_from_pretrained.OFFICIAL_MODEL_NAMES = transformer_lens.loading_from_pretrained.OFFICIAL_MODEL_NAMES + ["yhavinga/gpt2-medium-dutch"]
+
+transformer_lens.loading.OFFICIAL_MODEL_NAMES = (
+    transformer_lens.loading.OFFICIAL_MODEL_NAMES + ["yhavinga/gpt2-medium-dutch"]
+)
+
+transformer.
 
 LOGGER = logging.getLogger(__name__)
 
@@ -57,9 +66,14 @@ class CMA:
         self.config = config
         self.device = device
         self.model = HookedTransformer.from_pretrained(config.model, device=device)
+        self.model = transformer_lens.HookedTransformer.from_pretrained(
+            "yhavinga/gpt2-medium-dutch", device=device
+        )
         self.model.cfg.use_attn_result = True
-        self.she_token = self.model.tokenizer.encode(" she")[0]
-        self.he_token = self.model.tokenizer.encode(" he")[0]
+        # self.she_token = self.model.tokenizer.encode(" she")[0]
+        # self.he_token = self.model.tokenizer.encode(" he")[0]
+        self.he_token = self.model.tokenizer.encode(" zij")[0]
+        self.he_token = self.model.tokenizer.encode(" hij")[0]
 
     def indirect_effects(self, dataloader):
         self.model.eval()
