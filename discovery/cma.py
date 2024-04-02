@@ -70,7 +70,7 @@ class CMA:
         self.model.cfg.use_attn_result = True
         # self.she_token = self.model.tokenizer.encode(" she")[0]
         # self.he_token = self.model.tokenizer.encode(" he")[0]
-        self.he_token = self.model.tokenizer.encode(" zij")[0]
+        self.she_token = self.model.tokenizer.encode(" zij")[0]
         self.he_token = self.model.tokenizer.encode(" hij")[0]
 
     def indirect_effects(self, dataloader):
