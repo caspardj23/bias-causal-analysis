@@ -75,10 +75,10 @@ class CMA:
 
     def indirect_effects(self, dataloader):
         self.model.eval()
-        effects = np.zeros((12, 8))
+        effects = np.zeros((12, self.model.cfg.n_heads))
         for layer in range(12):
-            for head in range(8):
-                mask = torch.zeros((12, 8))
+            for head in range(self.model.cfg.n_heads):
+                mask = torch.zeros((12, self.model.cfg.n_heads))
                 mask[layer, head] = 1
                 effects[layer, head] = self.indirect_effect(dataloader, mask)
         return effects
