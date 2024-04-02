@@ -12,15 +12,13 @@ from jaxtyping import Float, Int
 
 from transformer_lens.hook_points import HookPoint
 from transformer_lens import HookedTransformer, ActivationCache
-import transformer
+import transformers
 
 # transformer_lens.loading_from_pretrained.OFFICIAL_MODEL_NAMES = transformer_lens.loading_from_pretrained.OFFICIAL_MODEL_NAMES + ["yhavinga/gpt2-medium-dutch"]
 
 transformer_lens.loading.OFFICIAL_MODEL_NAMES = (
     transformer_lens.loading.OFFICIAL_MODEL_NAMES + ["yhavinga/gpt2-medium-dutch"]
 )
-
-transformer.
 
 LOGGER = logging.getLogger(__name__)
 
