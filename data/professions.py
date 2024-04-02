@@ -64,13 +64,13 @@ class ProfessionsData:
         male_stereo = []
         female_stereo = []
         with open(
-            path.join(self.data_path, "professions_male_stereo_corr.json"), "r"
+            path.join(self.data_path, "professions_male_stereo_nl.json"), "r"
         ) as f:
             for l in f:
                 for j in eval(l):
                     male_stereo.append(j[0])
         with open(
-            path.join(self.data_path, "professions_female_stereo_corr.json"), "r"
+            path.join(self.data_path, "professions_female_stereo_nl.json"), "r"
         ) as f:
             for l in f:
                 for j in eval(l):
@@ -80,7 +80,7 @@ class ProfessionsData:
 
     def get_profession_list(self, indices=None):
         word_list = []
-        with open(path.join(self.data_path, "professions.json"), "r") as f:
+        with open(path.join(self.data_path, "professions_nl.json"), "r") as f:
             for l in f:
                 for j in eval(l):
                     word_list.append(j[0])
@@ -91,24 +91,43 @@ class ProfessionsData:
         Get list of all considered templates by Vig et al. 2020
         A subset from https://arxiv.org/pdf/1807.11714.pdf Lu et al. 2020
         """
+        # templates = [
+        #     "The {} said that",
+        #     "The {} yelled that",
+        #     "The {} whispered that",
+        #     "The {} wanted that",
+        #     "The {} desired that",
+        #     "The {} wished that",
+        #     "The {} ate because",
+        #     "The {} ran because",
+        #     "The {} drove because",
+        #     "The {} slept because",
+        #     "The {} cried because",
+        #     "The {} laughed because",
+        #     "The {} went home because",
+        #     "The {} stayed up because",
+        #     "The {} was fired because",
+        #     "The {} was promoted because",
+        #     "The {} yelled because",
+        # ]
         templates = [
-            "The {} said that",
-            "The {} yelled that",
-            "The {} whispered that",
-            "The {} wanted that",
-            "The {} desired that",
-            "The {} wished that",
-            "The {} ate because",
-            "The {} ran because",
-            "The {} drove because",
-            "The {} slept because",
-            "The {} cried because",
-            "The {} laughed because",
-            "The {} went home because",
-            "The {} stayed up because",
-            "The {} was fired because",
-            "The {} was promoted because",
-            "The {} yelled because",
+            "De {} zei dat",
+            "De {} schreeuwde dat",
+            "De {} fluisterde dat",
+            "De {} wilde dat",
+            "De {} verlangde dat",
+            "De {} wenste dat",
+            "De {} at omdat",
+            "De {} rende omdat",
+            "De {} reed omdat",
+            "De {} sliep omdat",
+            "De {} huilde omdat",
+            "De {} lachte omdat",
+            "De {} ging naar huis omdat",
+            "De {} bleef wakker omdat",
+            "De {} was ontslagen omdat",
+            "De {} was gepromoveerd omdat",
+            "De {} schreeuwde omdat",
         ]
         if indices:
             subset_templates = [templates[i - 1] for i in indices]
