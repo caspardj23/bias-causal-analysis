@@ -79,6 +79,7 @@ class CMA:
         self.model = transformer_lens.HookedTransformer.from_pretrained(
             "GroNLP/gpt2-small-dutch", device=device
         )
+        # self.model = transformers.AutoModel.from_pretrained("GroNLP/gpt2-small-dutch")
         self.model.cfg.use_attn_result = True
         # self.she_token = self.model.tokenizer.encode(" she")[0]
         # self.he_token = self.model.tokenizer.encode(" he")[0]
