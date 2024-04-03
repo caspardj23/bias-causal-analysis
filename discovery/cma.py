@@ -19,9 +19,15 @@ import transformers
 
 # transformer_lens.loading_from_pretrained.OFFICIAL_MODEL_NAMES = transformer_lens.loading_from_pretrained.OFFICIAL_MODEL_NAMES + ["yhavinga/gpt2-medium-dutch"]
 
+# transformer_lens.loading.OFFICIAL_MODEL_NAMES = (
+#     transformer_lens.loading.OFFICIAL_MODEL_NAMES + ["yhavinga/gpt2-medium-dutch"]
+# )
+
+
 transformer_lens.loading.OFFICIAL_MODEL_NAMES = (
-    transformer_lens.loading.OFFICIAL_MODEL_NAMES + ["yhavinga/gpt2-medium-dutch"]
+    transformer_lens.loading.OFFICIAL_MODEL_NAMES + ["GroNLP/gpt2-small-dutch"]
 )
+
 
 LOGGER = logging.getLogger(__name__)
 
@@ -67,8 +73,11 @@ class CMA:
         self.config = config
         self.device = device
         # self.model = HookedTransformer.from_pretrained(config.model, device=device)
+        # self.model = transformer_lens.HookedTransformer.from_pretrained(
+        #     "yhavinga/gpt2-medium-dutch", device=device
+        # )
         self.model = transformer_lens.HookedTransformer.from_pretrained(
-            "yhavinga/gpt2-medium-dutch", device=device
+            "GroNLP/gpt2-small-dutch", device=device
         )
         self.model.cfg.use_attn_result = True
         # self.she_token = self.model.tokenizer.encode(" she")[0]
@@ -81,10 +90,10 @@ class CMA:
 
     def indirect_effects(self, dataloader):
         self.model.eval()
-        effects = np.zeros((24, self.model.cfg.n_heads))
-        for layer in range(24):
+        effects = np.zeros((self.model.cfg.n_layers, self.model.cfg.n_heads))
+        for layer in range(self.model.cfg.n_layers):
             for head in range(self.model.cfg.n_heads):
-                mask = torch.zeros((24, self.model.cfg.n_heads))
+                mask = torch.zeros((self.model.cfg.n_layers, self.model.cfg.n_heads))
                 mask[layer, head] = 1
                 effects[layer, head] = self.indirect_effect(dataloader, mask)
         return effects
@@ -157,7 +166,7 @@ class CMA:
                         cf_tail_indices=cf_tail_indices,
                     ),
                 )
-                for i in range(24)
+                for i in range(self.model.cfg.n_layers)
             ],
         )
         tail_indices = (
