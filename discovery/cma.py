@@ -1,3 +1,6 @@
+import os
+
+os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
 import torch
 import numpy as np
 import logging
@@ -63,7 +66,7 @@ class CMA:
     def __init__(self, config: CMAConfig, device):
         self.config = config
         self.device = device
-        self.model = HookedTransformer.from_pretrained(config.model, device=device)
+        # self.model = HookedTransformer.from_pretrained(config.model, device=device)
         self.model = transformer_lens.HookedTransformer.from_pretrained(
             "yhavinga/gpt2-medium-dutch", device=device
         )
@@ -72,6 +75,9 @@ class CMA:
         # self.he_token = self.model.tokenizer.encode(" he")[0]
         self.she_token = self.model.tokenizer.encode(" zij")[0]
         self.he_token = self.model.tokenizer.encode(" hij")[0]
+        # Paar getallen checken:
+        #  self.model.cfg
+        # dmodel, vocab, n_heads
 
     def indirect_effects(self, dataloader):
         self.model.eval()
