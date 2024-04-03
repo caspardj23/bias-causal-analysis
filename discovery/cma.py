@@ -76,7 +76,7 @@ class CMA:
     def indirect_effects(self, dataloader):
         self.model.eval()
         effects = np.zeros((24, self.model.cfg.n_heads))
-        for layer in range(12, 24):
+        for layer in range(24):
             for head in range(self.model.cfg.n_heads):
                 mask = torch.zeros((24, self.model.cfg.n_heads))
                 mask[layer, head] = 1
@@ -151,7 +151,7 @@ class CMA:
                         cf_tail_indices=cf_tail_indices,
                     ),
                 )
-                for i in range(12, 24)
+                for i in range(24)
             ],
         )
         tail_indices = (
