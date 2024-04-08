@@ -89,18 +89,20 @@ class CMA:
         # Paar getallen checken:
         #  self.model.cfg
         # dmodel, vocab, n_heads
-        print("config: ", config)
-        print("self.model.cfg: ", self.model.cfg)
-        print("self.model.cfg.d_model: ", self.model.cfg.d_model)
-        print("self.model.cfg.d_vocab: ", self.model.cfg.d_vocab)
-        print("self.model.cfg.n_heads: ", self.model.cfg.n_heads)
+
+        print("GPT2-small-dutch GroNLP config: ", self.model.cfg)
+        print("GPT2-small-dutch GroNLP d_model: ", self.model.cfg.d_model)
+        print("GPT2-small-dutch GroNLP d_vocab: ", self.model.cfg.d_vocab)
+        print("GPT2-small-dutch GroNLP n_heads: ", self.model.cfg.n_heads)
         gpt2nl = transformer_lens.HookedTransformer.from_pretrained(
             "yhavinga/gpt2-medium-dutch"
         )
-        print("GPT2-medium-dutch d_model: ", gpt2nl.cfg.d_model)
-        print("GPT2-medium-dutch d_vocab: ", gpt2nl.cfg.d_vocab)
-        print("GPT2-medium-dutch n_heads: ", gpt2nl.cfg.n_heads)
+        print("GPT2-medium-dutch Havinga config: ", gpt2nl.cfg)
+        print("GPT2-medium-dutch Havinga d_model: ", gpt2nl.cfg.d_model)
+        print("GPT2-medium-dutch Havinga d_vocab: ", gpt2nl.cfg.d_vocab)
+        print("GPT2-medium-dutch Havinga n_heads: ", gpt2nl.cfg.n_heads)
         gpt2 = transformer_lens.HookedTransformer.from_pretrained(config.model)
+        print("GPT2-small d_model: ", gpt2.cfg)
         print("GPT2-small d_model: ", gpt2.cfg.d_model)
         print("GPT2-small d_vocab: ", gpt2.cfg.d_vocab)
         print("GPT2-small n_heads: ", gpt2.cfg.n_heads)
