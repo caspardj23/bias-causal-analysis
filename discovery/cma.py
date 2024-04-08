@@ -19,9 +19,9 @@ import transformers
 
 # transformer_lens.loading_from_pretrained.OFFICIAL_MODEL_NAMES = transformer_lens.loading_from_pretrained.OFFICIAL_MODEL_NAMES + ["yhavinga/gpt2-medium-dutch"]
 
-# transformer_lens.loading.OFFICIAL_MODEL_NAMES = (
-#     transformer_lens.loading.OFFICIAL_MODEL_NAMES + ["yhavinga/gpt2-medium-dutch"]
-# )
+transformer_lens.loading.OFFICIAL_MODEL_NAMES = (
+    transformer_lens.loading.OFFICIAL_MODEL_NAMES + ["yhavinga/gpt2-medium-dutch"]
+)
 
 
 transformer_lens.loading.OFFICIAL_MODEL_NAMES = (
