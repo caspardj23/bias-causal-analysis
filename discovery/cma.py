@@ -84,10 +84,16 @@ class CMA:
         # self.she_token = self.model.tokenizer.encode(" she")[0]
         # self.he_token = self.model.tokenizer.encode(" he")[0]
         self.she_token = self.model.tokenizer.encode(" zij")[0]
+        self.model.generate()
         self.he_token = self.model.tokenizer.encode(" hij")[0]
         # Paar getallen checken:
         #  self.model.cfg
         # dmodel, vocab, n_heads
+        print("config: ", config)
+        print("self.model.cfg: ", self.model.cfg)
+        print("self.model.cfg.d_model: ", self.model.cfg.d_model)
+        print("self.model.cfg.d_vocab: ", self.model.cfg.d_vocab)
+        print("self.model.cfg.n_heads: ", self.model.cfg.n_heads)
 
     def indirect_effects(self, dataloader):
         self.model.eval()
