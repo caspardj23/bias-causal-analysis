@@ -131,6 +131,10 @@ class CMA:
                 mask = torch.zeros((self.model.cfg.n_layers, self.model.cfg.n_heads))
                 mask[layer, head] = 1
                 effects[layer, head] = self.indirect_effect(dataloader, mask)
+                print(
+                    "Self-indirect effect -- effects[layer, head]: ",
+                    effects[layer, head],
+                )
         return effects
 
     def indirect_effect(self, dataloader, mask):
@@ -145,6 +149,7 @@ class CMA:
         LOGGER.info(mask)
         nie = []
         for batch in dataloader:
+            print("batch: ", batch)
             originals, counterfactuals, y = batch
             y = y.to(self.device)
             o_logits, i_logits = self._intervene(originals, counterfactuals, mask)
