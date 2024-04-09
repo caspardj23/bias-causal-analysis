@@ -16,6 +16,7 @@ from jaxtyping import Float, Int
 from transformer_lens.hook_points import HookPoint
 from transformer_lens import HookedTransformer, ActivationCache
 import transformers
+from transformers import GPT2Tokenizer
 
 # transformer_lens.loading_from_pretrained.OFFICIAL_MODEL_NAMES = transformer_lens.loading_from_pretrained.OFFICIAL_MODEL_NAMES + ["yhavinga/gpt2-medium-dutch"]
 
@@ -76,8 +77,9 @@ class CMA:
         """GPT2 Small Original"""
         # self.model = HookedTransformer.from_pretrained(config.model, device=device)
         # self.model.cfg.use_attn_result = True
-        # self.she_token = self.model.tokenizer.encode(" she")[0]
-        # self.he_token = self.model.tokenizer.encode(" he")[0]
+        # self.model.tokenizer = GPT2Tokenizer.from_pretrained(config.model)
+        # self.she_token = self.model.tokenizer.encode(text='she')[0]
+        # self.he_token = self.model.tokenizer.encode('he')[0]
         # print("GPT2-small d_model: ", self.model.cfg)
 
         """GPT2 Small Dutch GroNLP"""
@@ -85,13 +87,14 @@ class CMA:
             "GroNLP/gpt2-small-dutch", device=device
         )
         self.model.cfg.use_attn_result = True
+        self.model.tokenizer = GPT2Tokenizer.from_pretrained("GroNLP/gpt2-small-dutch")
         self.she_token = self.model.tokenizer.encode("ze")[0]
         self.he_token = self.model.tokenizer.encode("hij")[0]
 
-        self.model.cfg.tokenizer_prepends_bos = False
-        self.model.cfg.d_vocab = 50257
-        self.model.cfg.d_vocab_out = 50257
-        print("GPT2-small-dutch Dutch GroNLP config: ", self.model.cfg)
+        # self.model.cfg.tokenizer_prepends_bos = False
+        # self.model.cfg.d_vocab = 50257
+        # self.model.cfg.d_vocab_out = 50257
+        # print("GPT2-small-dutch Dutch GroNLP config: ", self.model.cfg)
 
         """GPT2 Medium Dutch Havinga"""
         # self.model = transformer_lens.HookedTransformer.from_pretrained(
@@ -151,7 +154,7 @@ class CMA:
         for batch in dataloader:
             print("batch: ", batch)
             originals, counterfactuals, y = batch
-            y = y.to(self.device)
+            # y = y.to(self.device)
             o_logits, i_logits = self._intervene(originals, counterfactuals, mask)
             o_probs = torch.softmax(o_logits, dim=-1)
             i_probs = torch.softmax(i_logits, dim=-1)
