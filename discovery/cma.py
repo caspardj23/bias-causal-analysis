@@ -153,7 +153,7 @@ class CMA:
         for batch in dataloader:
             print("batch: ", batch)
             originals, counterfactuals, y = batch
-            # y = y.to(self.device)
+            y = y.to(self.device)
             o_logits, i_logits = self._intervene(originals, counterfactuals, mask)
             o_probs = torch.softmax(o_logits, dim=-1)
             i_probs = torch.softmax(i_logits, dim=-1)
