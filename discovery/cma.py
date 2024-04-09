@@ -72,42 +72,57 @@ class CMA:
     def __init__(self, config: CMAConfig, device):
         self.config = config
         self.device = device
-        # self.model = HookedTransformer.from_pretrained(config.model, device=device)
+
+        """GPT2 Small Original"""
+        self.model = HookedTransformer.from_pretrained(config.model, device=device)
+        self.model.cfg.use_attn_result = True
+        self.she_token = self.model.tokenizer.encode(" she")[0]
+        self.he_token = self.model.tokenizer.encode(" he")[0]
+        print("GPT2-small d_model: ", self.model.cfg)
+
+        """GPT2 Small Dutch GroNLP"""
+        # self.model = transformer_lens.HookedTransformer.from_pretrained(
+        #     "GroNLP/gpt2-small-dutch", device=device
+        # )
+        # self.model.cfg.use_attn_result = True
+
+        # self.she_token = self.model.tokenizer.encode(" zij")[0]
+        # self.he_token = self.model.tokenizer.encode(" hij")[0]
+
+        # self.model.cfg.tokenizer_prepends_bos = False
+        # self.model.cfg.d_vocab = 50257
+        # self.model.cfg.d_vocab_out = 50257
+        # print("GPT2-small-dutch Dutch GroNLP config: ", self.model.cfg)
+
+        """GPT2 Medium Dutch Havinga"""
         # self.model = transformer_lens.HookedTransformer.from_pretrained(
         #     "yhavinga/gpt2-medium-dutch", device=device
         # )
-        self.model = transformer_lens.HookedTransformer.from_pretrained(
-            "GroNLP/gpt2-small-dutch", device=device
-        )
-        # self.model = transformers.AutoModel.from_pretrained("GroNLP/gpt2-small-dutch")
-        self.model.cfg.use_attn_result = True
-        self.model.cfg.tokenizer_prepends_bos = False
-        self.model.cfg.d_vocab = 50257
-        self.model.cfg.d_vocab_out = 50257
-        # self.she_token = self.model.tokenizer.encode(" she")[0]
-        # self.he_token = self.model.tokenizer.encode(" he")[0]
-        self.she_token = self.model.tokenizer.encode(" zij")[0]
-        self.he_token = self.model.tokenizer.encode(" hij")[0]
+        # self.model.cfg.use_attn_result = True
+        # self.she_token = self.model.tokenizer.encode(" zij")[0]
+        # self.he_token = self.model.tokenizer.encode(" hij")[0]
+        # print("GPT2-small-dutch Dutch GroNLP config: ", self.model.cfg)
 
         # Check configs for differrent GPT2 models
-        print("GPT2-small-dutch GroNLP config: ", self.model.cfg)
-        print("GPT2-small-dutch GroNLP d_model: ", self.model.cfg.d_model)
-        print("GPT2-small-dutch GroNLP d_vocab: ", self.model.cfg.d_vocab)
-        print("GPT2-small-dutch GroNLP n_heads: ", self.model.cfg.n_heads)
-        gpt2nl = transformer_lens.HookedTransformer.from_pretrained(
-            "yhavinga/gpt2-medium-dutch"
-        )
-        gpt2nl.cfg.use_attn_result = True
-        print("GPT2-medium-dutch Havinga config: ", gpt2nl.cfg)
-        print("GPT2-medium-dutch Havinga d_model: ", gpt2nl.cfg.d_model)
-        print("GPT2-medium-dutch Havinga d_vocab: ", gpt2nl.cfg.d_vocab)
-        print("GPT2-medium-dutch Havinga n_heads: ", gpt2nl.cfg.n_heads)
-        gpt2 = transformer_lens.HookedTransformer.from_pretrained(config.model)
-        gpt2.cfg.use_attn_result = True
-        print("GPT2-small d_model: ", gpt2.cfg)
-        print("GPT2-small d_model: ", gpt2.cfg.d_model)
-        print("GPT2-small d_vocab: ", gpt2.cfg.d_vocab)
-        print("GPT2-small n_heads: ", gpt2.cfg.n_heads)
+        # print("GPT2-small-dutch GroNLP config: ", self.model.cfg)
+        # print("GPT2-small-dutch GroNLP d_model: ", self.model.cfg.d_model)
+        # print("GPT2-small-dutch GroNLP d_vocab: ", self.model.cfg.d_vocab)
+        # print("GPT2-small-dutch GroNLP n_heads: ", self.model.cfg.n_heads)
+        # gpt2nl = transformer_lens.HookedTransformer.from_pretrained(
+        #     "yhavinga/gpt2-medium-dutch"
+        # )
+        # gpt2nl.cfg.use_attn_result = True
+        # print("GPT2-medium-dutch Havinga config: ", gpt2nl.cfg)
+        # print("GPT2-medium-dutch Havinga d_model: ", gpt2nl.cfg.d_model)
+        # print("GPT2-medium-dutch Havinga d_vocab: ", gpt2nl.cfg.d_vocab)
+        # print("GPT2-medium-dutch Havinga n_heads: ", gpt2nl.cfg.n_heads)
+        # gpt2 = transformer_lens.HookedTransformer.from_pretrained(config.model)
+        # gpt2.cfg.use_attn_result = True
+
+        # print("GPT2-small d_model: ", gpt2.cfg)
+        # print("GPT2-small d_model: ", gpt2.cfg.d_model)
+        # print("GPT2-small d_vocab: ", gpt2.cfg.d_vocab)
+        # print("GPT2-small n_heads: ", gpt2.cfg.n_heads)
 
     def indirect_effects(self, dataloader):
         self.model.eval()
