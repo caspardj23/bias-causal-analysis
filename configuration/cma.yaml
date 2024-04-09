@@ -6,7 +6,7 @@ results_path: results/cma
   
 data:
   path: data
-  name: professions
+  name: professions_nl
   workers: 4
   batch_size: 32
   val_size: 0.15
