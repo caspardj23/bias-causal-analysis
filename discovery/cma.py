@@ -81,15 +81,15 @@ class CMA:
         )
         # self.model = transformers.AutoModel.from_pretrained("GroNLP/gpt2-small-dutch")
         self.model.cfg.use_attn_result = True
+        self.model.cfg.tokenizer_prepends_bos = True
+        self.model.cfg.d_vocab = 40000
+        self.model.cfg.d_vocab_out = 40000
         # self.she_token = self.model.tokenizer.encode(" she")[0]
         # self.he_token = self.model.tokenizer.encode(" he")[0]
         self.she_token = self.model.tokenizer.encode(" zij")[0]
-        self.model.generate()
         self.he_token = self.model.tokenizer.encode(" hij")[0]
-        # Paar getallen checken:
-        #  self.model.cfg
-        # dmodel, vocab, n_heads
 
+        # Check configs for differrent GPT2 models
         print("GPT2-small-dutch GroNLP config: ", self.model.cfg)
         print("GPT2-small-dutch GroNLP d_model: ", self.model.cfg.d_model)
         print("GPT2-small-dutch GroNLP d_vocab: ", self.model.cfg.d_vocab)
