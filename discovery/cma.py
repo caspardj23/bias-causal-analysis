@@ -85,8 +85,8 @@ class CMA:
             "GroNLP/gpt2-small-dutch", device=device
         )
         self.model.cfg.use_attn_result = True
-        self.she_token = self.model.tokenizer.encode(" zij")[0]
-        self.he_token = self.model.tokenizer.encode(" hij")[0]
+        self.she_token = self.model.tokenizer.encode("zij")[0]
+        self.he_token = self.model.tokenizer.encode("hij")[0]
 
         self.model.cfg.tokenizer_prepends_bos = False
         self.model.cfg.d_vocab = 50257
