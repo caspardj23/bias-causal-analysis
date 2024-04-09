@@ -6,7 +6,7 @@ from os import path, makedirs
 from sklearn.model_selection import train_test_split
 
 MAN = "man"
-WOMAN = "woman"
+WOMAN = "vrouw"
 
 
 class Dataset(Dataset):
