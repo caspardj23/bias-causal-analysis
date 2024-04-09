@@ -87,7 +87,6 @@ class CMA:
             "GroNLP/gpt2-small-dutch", device=device
         )
         self.model.cfg.use_attn_result = True
-        self.model.tokenizer = GPT2Tokenizer.from_pretrained("GroNLP/gpt2-small-dutch")
         self.she_token = self.model.tokenizer.encode("ze")[0]
         self.he_token = self.model.tokenizer.encode("hij")[0]
 
