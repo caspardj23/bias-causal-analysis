@@ -173,6 +173,7 @@ class CMA:
             i_pro_probs = torch.where(y == 1, i_probs_he, i_probs_she)
 
             nie_batch = (i_anti_probs / i_pro_probs) / (o_anti_probs / o_pro_probs) - 1
+            print("nie_batch", nie_batch)
 
             nie.extend(nie_batch.cpu().tolist())
         LOGGER.info(np.mean(nie))
