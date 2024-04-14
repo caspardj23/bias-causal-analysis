@@ -93,7 +93,7 @@ class CMA:
         # self.model.cfg.tokenizer_prepends_bos = False
         # self.model.cfg.d_vocab = 50257
         # self.model.cfg.d_vocab_out = 50257
-        # print("GPT2-small-dutch Dutch GroNLP config: ", self.model.cfg)
+        print("GPT2-small-dutch Dutch GroNLP config: ", self.model.cfg)
 
         """GPT2 Medium Dutch Havinga"""
         # self.model = transformer_lens.HookedTransformer.from_pretrained(
@@ -151,22 +151,22 @@ class CMA:
         LOGGER.info(mask)
         nie = []
         for batch in dataloader:
-            print("batch: ", batch)
+            # print("batch: ", batch)
             originals, counterfactuals, y = batch
             y = y.to(self.device)
             o_logits, i_logits = self._intervene(originals, counterfactuals, mask)
             o_probs = torch.softmax(o_logits, dim=-1)
             i_probs = torch.softmax(i_logits, dim=-1)
-            print("o_probs: ", o_probs)
-            print("i_probs: ", i_probs)
+            # print("o_probs: ", o_probs)
+            # print("i_probs: ", i_probs)
             o_probs_he = o_probs[:, self.he_token].squeeze()
             o_probs_she = o_probs[:, self.she_token].squeeze()
             i_probs_he = i_probs[:, self.he_token].squeeze()
             i_probs_she = i_probs[:, self.she_token].squeeze()
-            print("o_probs_he: ", o_probs_he)
-            print("o_probs_she: ", o_probs_she)
-            print("i_probs_he: ", i_probs_he)
-            print("i_probs_she: ", i_probs_she)
+            # print("o_probs_he: ", o_probs_he)
+            # print("o_probs_she: ", o_probs_she)
+            # print("i_probs_he: ", i_probs_he)
+            # print("i_probs_she: ", i_probs_she)
 
             o_anti_probs = torch.where(y == 1, o_probs_she, o_probs_he)
             i_anti_probs = torch.where(y == 1, i_probs_she, i_probs_he)
@@ -174,13 +174,13 @@ class CMA:
             o_pro_probs = torch.where(y == 1, o_probs_he, o_probs_she)
             i_pro_probs = torch.where(y == 1, i_probs_he, i_probs_she)
 
-            print("o_anti_probs: ", o_anti_probs)
-            print("i_anti_probs: ", i_anti_probs)
-            print("o_pro_probs: ", o_pro_probs)
-            print("i_pro_probs: ", i_pro_probs)
+            # print("o_anti_probs: ", o_anti_probs)
+            # print("i_anti_probs: ", i_anti_probs)
+            # print("o_pro_probs: ", o_pro_probs)
+            # print("i_pro_probs: ", i_pro_probs)
 
             nie_batch = (i_anti_probs / i_pro_probs) / (o_anti_probs / o_pro_probs) - 1
-            print("nie_batch", nie_batch)
+            # print("nie_batch", nie_batch)
 
             nie.extend(nie_batch.cpu().tolist())
         LOGGER.info(np.mean(nie))
