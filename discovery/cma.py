@@ -100,8 +100,8 @@ class CMA:
             "yhavinga/gpt2-medium-dutch", device=device
         )
         self.model.cfg.use_attn_result = True
-        self.she_token = self.model.tokenizer.encode("ze")[0]
-        self.he_token = self.model.tokenizer.encode("hij")[0]
+        self.she_token = self.model.tokenizer.encode(" ze")[0]
+        self.he_token = self.model.tokenizer.encode(" hij")[0]
         print("GPT2-medium-dutch Dutch Havinga config: ", self.model.cfg)
 
         # Check configs for differrent GPT2 models
