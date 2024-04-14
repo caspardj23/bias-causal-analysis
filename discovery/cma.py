@@ -90,6 +90,7 @@ class CMA:
         # self.model.tokenizer = HookedTransformer.set_tokenizer(tokenizer)
         # self.model.tokenizer = self.model.set_tokenizer(tokenizers)
         self.model.tokenizer = AutoTokenizer.from_pretrained("GroNLP/gpt2-small-dutch")
+        self.model.tokenizer.pad_token = self.model.tokenizer.eos_token
         self.model.cfg.use_attn_result = True
         self.she_token = self.model.tokenizer.encode(" ze")[0]
         self.he_token = self.model.tokenizer.encode(" hij")[0]
