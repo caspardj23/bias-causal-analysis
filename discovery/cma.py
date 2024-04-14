@@ -15,7 +15,7 @@ from jaxtyping import Float, Int
 
 from transformer_lens.hook_points import HookPoint
 from transformer_lens import HookedTransformer, ActivationCache
-import transformers
+from transformers import AutoTokenizer
 from transformers import GPT2Tokenizer
 
 # transformer_lens.loading_from_pretrained.OFFICIAL_MODEL_NAMES = transformer_lens.loading_from_pretrained.OFFICIAL_MODEL_NAMES + ["yhavinga/gpt2-medium-dutch"]
@@ -86,6 +86,7 @@ class CMA:
         self.model = HookedTransformer.from_pretrained(
             "GroNLP/gpt2-small-dutch", device=device
         )
+        self.model.tokenizer = AutoTokenizer.from_pretrained("GroNLP/gpt2-small-dutch")
         self.model.cfg.use_attn_result = True
         self.she_token = self.model.tokenizer.encode(" ze")[0]
         self.he_token = self.model.tokenizer.encode(" hij")[0]
