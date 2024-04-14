@@ -83,26 +83,26 @@ class CMA:
         # print("GPT2-small d_model: ", self.model.cfg)
 
         """GPT2 Small Dutch GroNLP"""
-        # self.model = HookedTransformer.from_pretrained(
-        #     "GroNLP/gpt2-small-dutch", device=device
-        # )
-        # self.model.cfg.use_attn_result = True
-        # self.she_token = self.model.tokenizer.encode("ze")[0]
-        # self.he_token = self.model.tokenizer.encode("hij")[0]
+        self.model = HookedTransformer.from_pretrained(
+            "GroNLP/gpt2-small-dutch", device=device
+        )
+        self.model.cfg.use_attn_result = True
+        self.she_token = self.model.tokenizer.encode(" ze ")[0]
+        self.he_token = self.model.tokenizer.encode(" hij ")[0]
 
         # self.model.cfg.tokenizer_prepends_bos = False
         # self.model.cfg.d_vocab = 50257
         # self.model.cfg.d_vocab_out = 50257
-        # print("GPT2-small-dutch Dutch GroNLP config: ", self.model.cfg)
+        print("GPT2-small-dutch Dutch GroNLP config: ", self.model.cfg)
 
         """GPT2 Medium Dutch Havinga"""
-        self.model = transformer_lens.HookedTransformer.from_pretrained(
-            "yhavinga/gpt2-medium-dutch", device=device
-        )
-        self.model.cfg.use_attn_result = True
-        self.she_token = self.model.tokenizer.encode(" ze")[0]
-        self.he_token = self.model.tokenizer.encode(" hij")[0]
-        print("GPT2-medium-dutch Dutch Havinga config: ", self.model.cfg)
+        # self.model = transformer_lens.HookedTransformer.from_pretrained(
+        #     "yhavinga/gpt2-medium-dutch", device=device
+        # )
+        # self.model.cfg.use_attn_result = True
+        # self.she_token = self.model.tokenizer.encode(" ze")[0]
+        # self.he_token = self.model.tokenizer.encode(" hij")[0]
+        # print("GPT2-medium-dutch Dutch Havinga config: ", self.model.cfg)
 
         # Check configs for differrent GPT2 models
         # print("GPT2-small-dutch GroNLP config: ", self.model.cfg)
