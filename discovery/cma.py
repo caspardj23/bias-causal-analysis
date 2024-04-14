@@ -86,11 +86,14 @@ class CMA:
         self.model = HookedTransformer.from_pretrained(
             "GroNLP/gpt2-small-dutch", device=device
         )
-        self.model.tokenizer = AutoTokenizer.from_pretrained("GroNLP/gpt2-small-dutch")
+        tokenizer = AutoTokenizer.from_pretrained("GroNLP/gpt2-small-dutch")
+        # self.model.tokenizer = HookedTransformer.set_tokenizer(tokenizer)
+        self.model.set_tokenizer(tokenizer)
+        # self.model.tokenizer = AutoTokenizer.from_pretrained("GroNLP/gpt2-small-dutch")
         self.model.cfg.use_attn_result = True
         self.she_token = self.model.tokenizer.encode(" ze")[0]
         self.he_token = self.model.tokenizer.encode(" hij")[0]
-        self.model.tokenizer.add_special_tokens({"pad_token": "[PAD]"})
+        # self.model.tokenizer.add_special_tokens({"pad_token": "[PAD]"})
         # self.model.cfg.tokenizer_prepends_bos = False
         # self.model.cfg.d_vocab = 50257
         # self.model.cfg.d_vocab_out = 50257
