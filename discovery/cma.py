@@ -18,17 +18,12 @@ from transformer_lens import HookedTransformer, ActivationCache
 from transformers import AutoTokenizer
 from transformers import GPT2Tokenizer
 
-# transformer_lens.loading_from_pretrained.OFFICIAL_MODEL_NAMES = transformer_lens.loading_from_pretrained.OFFICIAL_MODEL_NAMES + ["yhavinga/gpt2-medium-dutch"]
-
+"""Add dutch GPT2 models to transformer_lens."""
 transformer_lens.loading.OFFICIAL_MODEL_NAMES = (
-    transformer_lens.loading.OFFICIAL_MODEL_NAMES + ["yhavinga/gpt2-medium-dutch"]
+    transformer_lens.loading.OFFICIAL_MODEL_NAMES
+    + ["yhavinga/gpt2-medium-dutch"]
+    + ["GroNLP/gpt2-small-dutch"]
 )
-
-
-transformer_lens.loading.OFFICIAL_MODEL_NAMES = (
-    transformer_lens.loading.OFFICIAL_MODEL_NAMES + ["GroNLP/gpt2-small-dutch"]
-)
-
 
 LOGGER = logging.getLogger(__name__)
 
@@ -74,57 +69,14 @@ class CMA:
         self.config = config
         self.device = device
 
-        """GPT2 Small Original"""
-        # self.model = HookedTransformer.from_pretrained(config.model, device=device)
-        # self.model.cfg.use_attn_result = True
-        # # self.model.tokenizer = GPT2Tokenizer.from_pretrained(config.model)
-        # self.she_token = self.model.tokenizer.encode(' she')[0]
-        # self.he_token = self.model.tokenizer.encode(' he')[0]
-        # print("GPT2-small d_model: ", self.model.cfg)
-
-        """GPT2 Small Dutch GroNLP"""
-        self.model = HookedTransformer.from_pretrained(
-            "GroNLP/gpt2-small-dutch", device=device
-        )
-        # tokenizers = AutoTokenizer.from_pretrained("GroNLP/gpt2-small-dutch")
-        # self.model.tokenizer = HookedTransformer.set_tokenizer(tokenizer)
-        # self.model.tokenizer = self.model.set_tokenizer(tokenizers)
-        self.model.tokenizer = AutoTokenizer.from_pretrained("GroNLP/gpt2-small-dutch")
+        """GPT2-small-dutch GroNLP"""
+        self.model = HookedTransformer.from_pretrained(config.model, device=device)
+        self.model.tokenizer = AutoTokenizer.from_pretrained(config.model)
         self.model.tokenizer.pad_token = self.model.tokenizer.eos_token
         self.model.cfg.use_attn_result = True
         self.she_token = self.model.tokenizer.encode(" ze")[0]
         self.he_token = self.model.tokenizer.encode(" hij")[0]
-        print("GPT2-small-dutch Dutch GroNLP config: ", self.model.cfg)
-
-        """GPT2 Medium Dutch Havinga"""
-        # self.model = transformer_lens.HookedTransformer.from_pretrained(
-        #     "yhavinga/gpt2-medium-dutch", device=device
-        # )
-        # self.model.cfg.use_attn_result = True
-        # self.she_token = self.model.tokenizer.encode(" ze")[0]
-        # self.he_token = self.model.tokenizer.encode(" hij")[0]
-        # print("GPT2-medium-dutch Dutch Havinga config: ", self.model.cfg)
-
-        # Check configs for differrent GPT2 models
-        # print("GPT2-small-dutch GroNLP config: ", self.model.cfg)
-        # print("GPT2-small-dutch GroNLP d_model: ", self.model.cfg.d_model)
-        # print("GPT2-small-dutch GroNLP d_vocab: ", self.model.cfg.d_vocab)
-        # print("GPT2-small-dutch GroNLP n_heads: ", self.model.cfg.n_heads)
-        # gpt2nl = transformer_lens.HookedTransformer.from_pretrained(
-        #     "yhavinga/gpt2-medium-dutch"
-        # )
-        # gpt2nl.cfg.use_attn_result = True
-        # print("GPT2-medium-dutch Havinga config: ", gpt2nl.cfg)
-        # print("GPT2-medium-dutch Havinga d_model: ", gpt2nl.cfg.d_model)
-        # print("GPT2-medium-dutch Havinga d_vocab: ", gpt2nl.cfg.d_vocab)
-        # print("GPT2-medium-dutch Havinga n_heads: ", gpt2nl.cfg.n_heads)
-        # gpt2 = transformer_lens.HookedTransformer.from_pretrained(config.model)
-        # gpt2.cfg.use_attn_result = True
-
-        # print("GPT2-small d_model: ", gpt2.cfg)
-        # print("GPT2-small d_model: ", gpt2.cfg.d_model)
-        # print("GPT2-small d_vocab: ", gpt2.cfg.d_vocab)
-        # print("GPT2-small n_heads: ", gpt2.cfg.n_heads)
+        # print("GPT2-small-dutch Dutch GroNLP config: ", self.model.cfg)
 
     def indirect_effects(self, dataloader):
         self.model.eval()
