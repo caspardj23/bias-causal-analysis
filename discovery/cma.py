@@ -77,9 +77,9 @@ class CMA:
         """GPT2 Small Original"""
         # self.model = HookedTransformer.from_pretrained(config.model, device=device)
         # self.model.cfg.use_attn_result = True
-        # self.model.tokenizer = GPT2Tokenizer.from_pretrained(config.model)
-        # self.she_token = self.model.tokenizer.encode(text='she')[0]
-        # self.he_token = self.model.tokenizer.encode('he')[0]
+        # # self.model.tokenizer = GPT2Tokenizer.from_pretrained(config.model)
+        # self.she_token = self.model.tokenizer.encode(' she')[0]
+        # self.he_token = self.model.tokenizer.encode(' he')[0]
         # print("GPT2-small d_model: ", self.model.cfg)
 
         """GPT2 Small Dutch GroNLP"""
@@ -94,10 +94,6 @@ class CMA:
         self.model.cfg.use_attn_result = True
         self.she_token = self.model.tokenizer.encode(" ze")[0]
         self.he_token = self.model.tokenizer.encode(" hij")[0]
-        # self.model.tokenizer.add_special_tokens({"pad_token": "[PAD]"})
-        # self.model.cfg.tokenizer_prepends_bos = False
-        # self.model.cfg.d_vocab = 50257
-        # self.model.cfg.d_vocab_out = 50257
         print("GPT2-small-dutch Dutch GroNLP config: ", self.model.cfg)
 
         """GPT2 Medium Dutch Havinga"""
@@ -155,6 +151,7 @@ class CMA:
         mask = mask.to(self.device)
         LOGGER.info(mask)
         nie = []
+        print("len dataloader: ", len(dataloader))
         for batch in dataloader:
             # print("batch: ", batch)
             originals, counterfactuals, y = batch
