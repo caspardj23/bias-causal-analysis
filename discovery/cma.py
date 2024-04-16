@@ -107,6 +107,8 @@ class CMA:
         for batch in dataloader:
             print("batch: ", batch)
             print("len batch: ", len(batch))
+            print("len originals: ", len(originals))
+            print("len counterfactuals: ", len(counterfactuals))
             originals, counterfactuals, y = batch
             y = y.to(self.device)
             o_logits, i_logits = self._intervene(originals, counterfactuals, mask)
