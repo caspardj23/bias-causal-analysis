@@ -76,7 +76,7 @@ class CMA:
         self.model.cfg.use_attn_result = True
         self.she_token = self.model.tokenizer.encode(" ze")[0]
         self.he_token = self.model.tokenizer.encode(" hij")[0]
-        # print("GPT2-small-dutch Dutch GroNLP config: ", self.model.cfg)
+        print("GPT2-small-dutch Dutch GroNLP config: ", self.model.cfg)
 
     def indirect_effects(self, dataloader):
         self.model.eval()
@@ -103,13 +103,13 @@ class CMA:
         mask = mask.to(self.device)
         LOGGER.info(mask)
         nie = []
-        print("len dataloader: ", len(dataloader))
+        # print("len dataloader: ", len(dataloader))
         for batch in dataloader:
-            print("batch: ", batch)
-            print("len batch: ", len(batch))
+            # print("batch: ", batch)
+            # print("len batch: ", len(batch))
             originals, counterfactuals, y = batch
-            print("len originals: ", len(originals))
-            print("len counterfactuals: ", len(counterfactuals))
+            # print("len originals: ", len(originals))
+            # print("len counterfactuals: ", len(counterfactuals))
             y = y.to(self.device)
             o_logits, i_logits = self._intervene(originals, counterfactuals, mask)
             # print("o_logits: ", o_logits)
