@@ -36,6 +36,7 @@ class ProfessionsData:
         contexts = []
         counter_contexts = []
         labels = []
+        extra_list = []
         for template in templates:
             for profession in professions:
                 context = template.format(profession)
@@ -43,9 +44,14 @@ class ProfessionsData:
                 if profession in male_stereo:
                     counter_contexts.append(template.format(WOMAN))
                     labels.append(1)
+                elif profession in female_stereo:
+                    counter_contexts.append(template.format(MAN))
+                    labels.append(int())
                 else:
                     counter_contexts.append(template.format(MAN))
                     labels.append(int())
+                    extra_list.append(profession)
+        print("Extra list with unused professions: ", extra_list)
         data = list(zip(contexts, counter_contexts, labels))
         return data
 
