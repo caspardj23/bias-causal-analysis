@@ -70,7 +70,7 @@ class ProfessionsData:
                 for j in eval(l):
                     male_stereo.append(j[0])
         with open(
-            path.join(self.data_path, "professions_female_stereo_nl_corr.json"), "r"
+            path.join(self.data_path, "professions_female_stereo_nl_corr2.json"), "r"
         ) as f:
             for l in f:
                 for j in eval(l):
