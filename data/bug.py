@@ -39,7 +39,7 @@ class Dataset(Dataset):
 
 
 class BUGBalanced:
-    def __init__(self, data_path="./", val_split=0.1, seed=42):
+    def __init__(self, data_path="./", val_split=0.2, seed=42):
         super()
         file_path = path.join(data_path, FILE_NAME)
         self.train_data, self.val_data = self.prepare_data(
