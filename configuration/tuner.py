@@ -1,18 +1,21 @@
 from dataclasses import dataclass
 from typing import List
 
+
 @dataclass
 class ModelConfig:
     name: str
     components_path: str
     components: str
 
+
 @dataclass
 class DataConfig:
     name: str
     path: str
-    workers:int
+    workers: int
     val_size: float
+
 
 @dataclass
 class TunerConfig:
@@ -23,6 +26,7 @@ class TunerConfig:
     batch_size: int
     checkpoint_path: str
     results_path: str
+    ID_path: str
 
 
 @dataclass

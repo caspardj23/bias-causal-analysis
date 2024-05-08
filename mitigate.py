@@ -102,7 +102,9 @@ def _save_checkpoint(config: MitigationConfig, filename: str):
                 file, map_location=torch.device("cpu")
             )
             torch.save(
-                ft_model.model, Path(config.tuner.results_path) / (filename + ".pt")
+                ft_model.model,
+                Path(config.tuner.results_path)
+                / (filename + config.tuner.ID_path + ".pt"),
             )
 
 
