@@ -22,5 +22,5 @@ tuner:
   batch_size: 32
   checkpoint_path: checkpoints
   results_path: /content/drive/My Drive/Mitigation_data
-  ID_path: ID1
+  ID_path: ID2_val_0.2
   
