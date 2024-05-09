@@ -108,7 +108,7 @@ def _save_checkpoint(config: MitigationConfig, filename: str):
         )
         print(
             "Model succesfully saved at ",
-            Path(config.tuner.results_path) / ("x" + ".pt"),
+            Path(config.tuner.results_path) / (filename + config.tuner.ID_path + ".pt"),
         )
 
 
