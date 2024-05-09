@@ -88,6 +88,12 @@ def fine_tune(config: MitigationConfig):
     )
 
     trainer.fit(model, train_dataloader, val_dataloader)
+    ft_model = model
+    torch.save(
+        ft_model.model,
+        Path(config.tuner.results_path)
+        / (filename + str(config.tuner.epochs) + "_epochs" + ".pt"),
+    )
     _save_checkpoint(config, filename)
 
 
@@ -99,14 +105,7 @@ def _save_checkpoint(config: MitigationConfig, filename: str):
     for file in list_of_files:
         # if file.stem.startswith(filename):
         LOGGER.info(f"Saving checkpoint: {file}")
-        ft_model = GPT2FineTuningModule.load_from_checkpoint(
-            file, map_location=torch.device("cuda")
-        )
-        torch.save(
-            ft_model.model,
-            Path(config.tuner.results_path)
-            / (filename + str(config.tuner.epochs) + "_epochs" + ".pt"),
-        )
+
         print(
             "Model succesfully saved at ",
             Path(config.tuner.results_path)
