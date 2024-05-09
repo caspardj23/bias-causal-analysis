@@ -79,7 +79,7 @@ def fine_tune(config: MitigationConfig):
                 # monitor=None,
                 # mode="min",
                 dirpath=config.tuner.checkpoint_path,
-                filename=filename + "_{epoch:03d}_{val_loss:.2f}",
+                filename=filename + "_{epoch:02d}_{val_loss:.2f}",
                 # save_top_k=1,
                 # every_n_epochs=1,
             ),
