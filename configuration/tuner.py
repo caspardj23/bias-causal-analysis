@@ -26,7 +26,7 @@ class TunerConfig:
     batch_size: int
     checkpoint_path: str
     results_path: str
-    ID_path: str
+    # ID_path: str
 
 
 @dataclass
