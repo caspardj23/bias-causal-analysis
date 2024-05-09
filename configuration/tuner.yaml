@@ -12,7 +12,7 @@ data:
   val_size: 0.2
 
 tuner:
-  epochs: 20
+  epochs: 5
   lr: 1E-4
   warmup: 0
   eps: 1e-8
