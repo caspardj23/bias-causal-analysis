@@ -76,7 +76,7 @@ def fine_tune(config: MitigationConfig):
         deterministic=True,
         callbacks=[
             ModelCheckpoint(
-                monitor="val_loss",
+                monitor=None,
                 mode="min",
                 dirpath=config.tuner.checkpoint_path,
                 filename=filename + "_{epoch:03d}_{val_loss:.2f}",
