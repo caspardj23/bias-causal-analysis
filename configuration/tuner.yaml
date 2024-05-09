@@ -3,9 +3,7 @@ seed: 9
 model:
   name: 'GroNLP/gpt2-small-dutch'
   components_path: components
-  # components: attn_layers
   components: attn_heads_cma_dutch_top10
-  # components: attn_heads_cma_dutch_top10
     
 data:
   path: data
@@ -14,7 +12,7 @@ data:
   val_size: 0.2
 
 tuner:
-  epochs: 2
+  epochs: 20
   lr: 1E-4
   warmup: 0
   eps: 1e-8
