@@ -104,7 +104,7 @@ def _save_checkpoint(config: MitigationConfig, filename: str):
         )
         torch.save(
             ft_model.model,
-            Path(config.tuner.results_path) / (filename + ".pt"),
+            Path(config.tuner.results_path) / ("x" + ".pt"),
         )
         print(
             "Model succesfully saved at ",
