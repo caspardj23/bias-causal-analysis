@@ -1,6 +1,6 @@
 seed: 9
 
-model: gpt2-small
+model: GroNLP/gpt2-small-dutch
 attn_heads: 10
 results_path: results/cma
   
