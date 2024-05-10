@@ -103,10 +103,10 @@ class CMA:
         mask = mask.to(self.device)
         LOGGER.info(mask)
         nie = []
-        # print("len dataloader: ", len(dataloader))
+        print("len dataloader: ", len(dataloader))
         for batch in dataloader:
             # print("batch: ", batch)
-            # print("len batch: ", len(batch))
+            print("len batch: ", len(batch))
             originals, counterfactuals, y = batch
             # print("len originals: ", len(originals))
             # print("len counterfactuals: ", len(counterfactuals))
