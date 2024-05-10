@@ -108,8 +108,8 @@ class CMA:
             # print("batch: ", batch)
             print("len batch: ", len(batch))
             originals, counterfactuals, y = batch
-            # print("len originals: ", len(originals))
-            # print("len counterfactuals: ", len(counterfactuals))
+            print("len originals: ", len(originals))
+            print("len counterfactuals: ", len(counterfactuals))
             y = y.to(self.device)
             o_logits, i_logits = self._intervene(originals, counterfactuals, mask)
             # print("o_logits: ", o_logits)
