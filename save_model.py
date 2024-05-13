@@ -20,15 +20,12 @@ from omegaconf import OmegaConf
 import os
 
 file = ""
-file_corr = "GroNLP/gpt2-small-dutch_attn_heads_cma_dutch_top10_seed_9_new"
+file_corr = "gpt2-small-dutch_all_seed_9_new"
 
-for filename in os.listdir("checkpoints/GroNLP"):
+for filename in os.listdir("checkpoints"):
     # Check if the path is a file (not a directory)
-    if (
-        filename
-        == "gpt2-small-dutch_attn_heads_cma_dutch_top10_seed_9_epoch=039_val_loss=3.88.ckpt"
-    ):
-        file = os.path.join("checkpoints/GroNLP", filename)
+    if filename == "gpt2-small-dutch_all_seed_9_epoch=007_val_loss=2.44.ckpt":
+        file = os.path.join("checkpoints", filename)
 
 print(file)
 
@@ -39,11 +36,13 @@ ft_model = GPT2FineTuningModule.load_from_checkpoint(
 torch.save(
     ft_model.model,
     Path("/content/drive/My Drive/Mitigation_data")
+    / ("GroNLP")
     / (file_corr + "_epochs" + str(40) + ".pt"),
 )
 
 print(
     "Model succesfully saved at ",
     Path("/content/drive/My Drive/Mitigation_data")
+    / ("GroNLP")
     / (file_corr + "_epochs" + str(40) + ".pt"),
 )
