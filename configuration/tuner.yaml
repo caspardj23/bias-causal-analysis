@@ -1,7 +1,7 @@
 seed: 9
 
 model:
-  name: gpt2
+  name: GroNLP/gpt2-small-dutchs
   components_path: components
   components: random
 
