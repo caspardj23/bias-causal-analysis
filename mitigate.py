@@ -97,6 +97,8 @@ def _save_checkpoint(config: MitigationConfig, filename: str):
     print("Checkpoint path: ", checkpoint_path)
     list_of_files = list(checkpoint_path.glob("*.ckpt"))
     print("list of files: ", list_of_files)
+    list_of_models = list(checkpoint_path.glob("*.pt"))
+    print("list of models: ", list_of_models)
     for file in list_of_files:
         # if file.stem.startswith(filename):
         LOGGER.info(f"Saving checkpoint: {file}")
