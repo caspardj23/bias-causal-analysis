@@ -76,12 +76,12 @@ def fine_tune(config: MitigationConfig):
         deterministic=True,
         callbacks=[
             ModelCheckpoint(
-                # monitor=None,
-                # mode="min",
+                monitor="val_loss",
+                mode="min",
                 dirpath=config.tuner.checkpoint_path,
-                filename=filename + "_{epoch:02d}_{val_loss:.2f}",
-                # save_top_k=1,
-                # every_n_epochs=1,
+                filename=filename + "_{epoch:03d}_{val_loss:.2f}",
+                save_top_k=1,
+                every_n_epochs=1,
             ),
             EarlyStopping(monitor="val_loss", patience=10, mode="min"),
         ],
