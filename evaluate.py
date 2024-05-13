@@ -25,115 +25,115 @@ def evaluate(
     model, tokenizer, device, bias_type, stereo_data, blimp_data, crowspairs_data
 ):
     results = {}
-    ss_results = eval_stereoset(
-        model=model,
-        tokenizer=tokenizer,
-        data=stereo_data,
-        bias=bias_type,
-        device=device,
-    )
-    results["LM Score"] = ss_results[bias_type]["LM Score"]
-    results["SS Score"] = ss_results[bias_type]["SS Score"]
-    results["ICAT"] = ss_results[bias_type]["ICAT Score"]
+    # ss_results = eval_stereoset(
+    #     model=model,
+    #     tokenizer=tokenizer,
+    #     data=stereo_data,
+    #     bias=bias_type,
+    #     device=device,
+    # )
+    # results["LM Score"] = ss_results[bias_type]["LM Score"]
+    # results["SS Score"] = ss_results[bias_type]["SS Score"]
+    # results["ICAT"] = ss_results[bias_type]["ICAT Score"]
 
-    blimp_score = eval_blimp(
-        model=model,
-        tokenizer=tokenizer,
-        data=blimp_data,
-        device=device,
-        sample=10000,
-        seed=42,
-    )
-    results["BLiMP"] = blimp_score
+    # blimp_score = eval_blimp(
+    #     model=model,
+    #     tokenizer=tokenizer,
+    #     data=blimp_data,
+    #     device=device,
+    #     sample=10000,
+    #     seed=42,
+    # )
+    # results["BLiMP"] = blimp_score
 
-    blimp_score = eval_blimp(
-        model=model,
-        tokenizer=tokenizer,
-        data="data/blimp/anaphor_gender_agreement.jsonl",
-        device=device,
-    )
-    results["BLiMP AGA"] = blimp_score
+    # blimp_score = eval_blimp(
+    #     model=model,
+    #     tokenizer=tokenizer,
+    #     data="data/blimp/anaphor_gender_agreement.jsonl",
+    #     device=device,
+    # )
+    # results["BLiMP AGA"] = blimp_score
 
-    blimp_score = eval_blimp(
-        model=model,
-        tokenizer=tokenizer,
-        data="data/blimp/irregular_plural_subject_verb_agreement_1.jsonl",
-        device=device,
-    )
-    results["BLiMP ISV1"] = blimp_score
+    # blimp_score = eval_blimp(
+    #     model=model,
+    #     tokenizer=tokenizer,
+    #     data="data/blimp/irregular_plural_subject_verb_agreement_1.jsonl",
+    #     device=device,
+    # )
+    # results["BLiMP ISV1"] = blimp_score
 
-    blimp_score = eval_blimp(
-        model=model,
-        tokenizer=tokenizer,
-        data="data/blimp/irregular_plural_subject_verb_agreement_2.jsonl",
-        device=device,
-    )
-    results["BLiMP ISV2"] = blimp_score
+    # blimp_score = eval_blimp(
+    #     model=model,
+    #     tokenizer=tokenizer,
+    #     data="data/blimp/irregular_plural_subject_verb_agreement_2.jsonl",
+    #     device=device,
+    # )
+    # results["BLiMP ISV2"] = blimp_score
 
-    blimp_score = eval_blimp(
-        model=model,
-        tokenizer=tokenizer,
-        data="data/blimp/regular_plural_subject_verb_agreement_1.jsonl",
-        device=device,
-    )
-    results["BLiMP RSV1"] = blimp_score
+    # blimp_score = eval_blimp(
+    #     model=model,
+    #     tokenizer=tokenizer,
+    #     data="data/blimp/regular_plural_subject_verb_agreement_1.jsonl",
+    #     device=device,
+    # )
+    # results["BLiMP RSV1"] = blimp_score
 
-    blimp_score = eval_blimp(
-        model=model,
-        tokenizer=tokenizer,
-        data="data/blimp/regular_plural_subject_verb_agreement_2.jsonl",
-        device=device,
-    )
-    results["BLiMP RSV2"] = blimp_score
+    # blimp_score = eval_blimp(
+    #     model=model,
+    #     tokenizer=tokenizer,
+    #     data="data/blimp/regular_plural_subject_verb_agreement_2.jsonl",
+    #     device=device,
+    # )
+    # results["BLiMP RSV2"] = blimp_score
 
-    cpairs_score = evaluate_crowspairs(
-        model=model,
-        tokenizer=tokenizer,
-        data_path=crowspairs_data,
-        device=device,
-        bias_type=bias_type,
-    )
-    results["CrowS-Pairs"] = cpairs_score
+    # cpairs_score = evaluate_crowspairs(
+    #     model=model,
+    #     tokenizer=tokenizer,
+    #     data_path=crowspairs_data,
+    #     device=device,
+    #     bias_type=bias_type,
+    # )
+    # results["CrowS-Pairs"] = cpairs_score
 
-    winobias_score = eval_winobias(
-        model=model,
-        tokenizer=tokenizer,
-        data_path="data/winobias",
-        stereo_file="pro_stereotyped_type1.txt.dev",
-        anti_stereo_file="anti_stereotyped_type1.txt.dev",
-        device=device,
-    )
-    results["WinoBias Type1 Dev"] = winobias_score
+    # winobias_score = eval_winobias(
+    #     model=model,
+    #     tokenizer=tokenizer,
+    #     data_path="data/winobias",
+    #     stereo_file="pro_stereotyped_type1.txt.dev",
+    #     anti_stereo_file="anti_stereotyped_type1.txt.dev",
+    #     device=device,
+    # )
+    # results["WinoBias Type1 Dev"] = winobias_score
 
-    winobias_score = eval_winobias(
-        model=model,
-        tokenizer=tokenizer,
-        data_path="data/winobias",
-        stereo_file="pro_stereotyped_type1.txt.test",
-        anti_stereo_file="anti_stereotyped_type1.txt.test",
-        device=device,
-    )
-    results["WinoBias Type1 Test"] = winobias_score
+    # winobias_score = eval_winobias(
+    #     model=model,
+    #     tokenizer=tokenizer,
+    #     data_path="data/winobias",
+    #     stereo_file="pro_stereotyped_type1.txt.test",
+    #     anti_stereo_file="anti_stereotyped_type1.txt.test",
+    #     device=device,
+    # )
+    # results["WinoBias Type1 Test"] = winobias_score
 
-    winobias_score = eval_winobias(
-        model=model,
-        tokenizer=tokenizer,
-        data_path="data/winobias",
-        stereo_file="pro_stereotyped_type2.txt.dev",
-        anti_stereo_file="anti_stereotyped_type2.txt.dev",
-        device=device,
-    )
-    results["WinoBias Type2 Dev"] = winobias_score
+    # winobias_score = eval_winobias(
+    #     model=model,
+    #     tokenizer=tokenizer,
+    #     data_path="data/winobias",
+    #     stereo_file="pro_stereotyped_type2.txt.dev",
+    #     anti_stereo_file="anti_stereotyped_type2.txt.dev",
+    #     device=device,
+    # )
+    # results["WinoBias Type2 Dev"] = winobias_score
 
-    winobias_score = eval_winobias(
-        model=model,
-        tokenizer=tokenizer,
-        data_path="data/winobias",
-        stereo_file="pro_stereotyped_type2.txt.test",
-        anti_stereo_file="anti_stereotyped_type2.txt.test",
-        device=device,
-    )
-    results["WinoBias Type2 Test"] = winobias_score
+    # winobias_score = eval_winobias(
+    #     model=model,
+    #     tokenizer=tokenizer,
+    #     data_path="data/winobias",
+    #     stereo_file="pro_stereotyped_type2.txt.test",
+    #     anti_stereo_file="anti_stereotyped_type2.txt.test",
+    #     device=device,
+    # )
+    # results["WinoBias Type2 Test"] = winobias_score
     professions_score = eval_professions(
         model=model, tokenizer=tokenizer, data_path="data", device=device
     )
@@ -157,8 +157,8 @@ def evaluate_save_results():
     blimp_data = "data/blimp"
     crowspairs_data = "data/crows_pairs_revised.csv"
     device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
-    model = GPT2LMHeadModel.from_pretrained("gpt2").to(device)
-    tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
+    model = GPT2LMHeadModel.from_pretrained("GroNLP/gpt2-small-dutch").to(device)
+    tokenizer = GPT2Tokenizer.from_pretrained("GroNLP/gpt2-small-dutch")
     model.eval()
     results = evaluate(
         model=model,
@@ -169,21 +169,21 @@ def evaluate_save_results():
         blimp_data=blimp_data,
         crowspairs_data=crowspairs_data,
     )
-    results["model"] = "gpt2_baseline"
-    results["seed"] = "0"
+    results["model"] = "gpt2-small-dutch_baseline"
+    results["seed"] = "9"
     print(results)
-    previous_results = load_results("gpt2_baseline", 0)
+    previous_results = load_results("gpt2-small-dutch_baseline", 0)
     print(previous_results)
     previous_results.update(results)
     print(previous_results)
-    save_results(previous_results, "gpt2_baseline", 0)
-    checkpoint_path = Path("results/mitigation")
+    save_results(previous_results, "gpt2-small-dutch_baseline", 0)
+    checkpoint_path = Path("/content/drive/My Drive/Mitigation_data/GroNLP")
     list_of_files = list(checkpoint_path.glob("*.pt"))
     for f in list_of_files:
         name = f.stem
         s = name.split("_seed_")
         model_name = s[0]
-        seed = s[1]
+        seed = "9"
         model = torch.load(f, map_location=device)
         results = evaluate(
             model=model,
