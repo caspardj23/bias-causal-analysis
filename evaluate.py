@@ -146,6 +146,10 @@ def save_results(results, model_name, seed):
         f"content/drive/My Drive/Mitigation_data/Evaluate/{model_name}_{seed}.json", "w"
     ) as f:
         json.dump(results, f)
+    print(
+        "Succesfully saved results at: ",
+        f"content/drive/My Drive/Mitigation_data/Evaluate/{model_name}_{seed}.json",
+    )
 
 
 def load_results(model_name, seed):
@@ -176,11 +180,11 @@ def evaluate_save_results():
     results["model"] = "gpt2-small-dutch_baseline"
     results["seed"] = "9"
     print(results)
-    previous_results = load_results("gpt2-small-dutch_baseline", 0)
-    print(previous_results)
-    previous_results.update(results)
-    print(previous_results)
-    save_results(previous_results, "gpt2-small-dutch_baseline", 0)
+    # previous_results = load_results("gpt2-small-dutch_baseline", 0)
+    # print(previous_results)
+    # previous_results.update(results)
+    # print(previous_results)
+    save_results(results, "gpt2-small-dutch_baseline", 0)
     checkpoint_path = Path("/content/drive/My Drive/Mitigation_data/GroNLP")
     list_of_files = list(checkpoint_path.glob("*.pt"))
     for f in list_of_files:
@@ -202,11 +206,11 @@ def evaluate_save_results():
         results["model"] = model_name
         results["seed"] = seed
         print(results)
-        previous_results = load_results(model_name=model_name, seed=seed)
-        print(previous_results)
-        previous_results.update(results)
-        print(previous_results)
-        save_results(previous_results, model_name=model_name, seed=seed)
+        # previous_results = load_results(model_name=model_name, seed=seed)
+        # print(previous_results)
+        # previous_results.update(results)
+        # print(previous_results)
+        save_results(results, model_name=model_name, seed=seed)
 
 
 def mask_from_components(filepath):
