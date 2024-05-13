@@ -94,6 +94,7 @@ def fine_tune(config: MitigationConfig):
 def _save_checkpoint(config: MitigationConfig, filename: str):
     """Save checkpoint to results"""
     checkpoint_path = Path(config.tuner.checkpoint_path)
+    print("Checkpoint path: ", checkpoint_path)
     list_of_files = list(checkpoint_path.glob("*.ckpt"))
     print("list of files: ", list_of_files)
     for file in list_of_files:
