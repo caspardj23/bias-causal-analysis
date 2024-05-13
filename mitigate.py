@@ -70,6 +70,8 @@ def fine_tune(config: MitigationConfig):
     logging.info(f"Components: {components}")
     model = GPT2FineTuningModule(config=config, components=components)
     filename = f"{config.model.name}_{config.model.components}_seed_{config.seed}"
+    if filename.startswith("GroNLP/"):
+        filename = filename[len("GroNLP/") :]
     trainer = pl.Trainer(
         max_epochs=config.tuner.epochs,
         check_val_every_n_epoch=1,
