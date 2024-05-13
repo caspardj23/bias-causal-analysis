@@ -99,22 +99,22 @@ def _save_checkpoint(config: MitigationConfig, filename: str):
     print("list of files: ", list_of_files)
     list_of_models = list(checkpoint_path.glob("*.pt"))
     print("list of models: ", list_of_models)
-    for file in list_of_files:
-        # if file.stem.startswith(filename):
-        LOGGER.info(f"Saving checkpoint: {file}")
-        ft_model = GPT2FineTuningModule.load_from_checkpoint(
-            file, map_location=torch.device("cuda")
-        )
-        torch.save(
-            ft_model.model,
-            Path(config.tuner.results_path)
-            / (filename + "_epochs" + str(config.tuner.epochs) + ".pt"),
-        )
-        print(
-            "Model succesfully saved at ",
-            Path(config.tuner.results_path)
-            / (filename + "_epochs" + str(config.tuner.epochs) + ".pt"),
-        )
+    # for file in list_of_files:
+    #     # if file.stem.startswith(filename):
+    #     LOGGER.info(f"Saving checkpoint: {file}")
+    #     ft_model = GPT2FineTuningModule.load_from_checkpoint(
+    #         file, map_location=torch.device("cuda")
+    #     )
+    #     torch.save(
+    #         ft_model.model,
+    #         Path(config.tuner.results_path)
+    #         / (filename + "_epochs" + str(config.tuner.epochs) + ".pt"),
+    #     )
+    #     print(
+    #         "Model succesfully saved at ",
+    #         Path(config.tuner.results_path)
+    #         / (filename + "_epochs" + str(config.tuner.epochs) + ".pt"),
+    #     )
 
 
 if __name__ == "__main__":
