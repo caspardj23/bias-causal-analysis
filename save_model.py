@@ -20,11 +20,14 @@ from omegaconf import OmegaConf
 import os
 
 file = ""
-file_corr = "GroNLP/gpt2-small-dutch_random_seed_9_new"
+file_corr = "GroNLP/gpt2-small-dutch_attn_heads_cma_dutch_top10_seed_9_new"
 
 for filename in os.listdir("checkpoints/GroNLP"):
     # Check if the path is a file (not a directory)
-    if filename == "gpt2-small-dutch_random_seed_9_epoch=037_val_loss=3.74.ckpt":
+    if (
+        filename
+        == "gpt2-small-dutch_attn_heads_cma_dutch_top10_seed_9_epoch=039_val_loss=3.88.ckpt"
+    ):
         file = os.path.join("checkpoints/GroNLP", filename)
 
 print(file)
