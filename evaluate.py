@@ -142,12 +142,16 @@ def evaluate(
 
 
 def save_results(results, model_name, seed):
-    with open(f"results/evaluation/{model_name}_{seed}.json", "w") as f:
+    with open(
+        f"content/drive/My Drive/Mitigation_data/Evaluate/{model_name}_{seed}.json", "w"
+    ) as f:
         json.dump(results, f)
 
 
 def load_results(model_name, seed):
-    with open(f"results/evaluation/{model_name}_{seed}.json", "r") as f:
+    with open(
+        f"content/drive/My Drive/Mitigation_data/Evaluate/{model_name}_{seed}.json", "r"
+    ) as f:
         results = json.load(f)
     return results
 
