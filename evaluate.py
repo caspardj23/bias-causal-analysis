@@ -196,21 +196,22 @@ def evaluate_save_results():
     checkpoint_path = Path("/content/drive/My Drive/Mitigation_data/GroNLP")
     list_of_files = list(checkpoint_path.glob("*.pt"))
     for f in list_of_files:
-        name = f.stem
-        # Find other split
-        s = name.split(".pt")
-        model_name = s[0]
-        seed = "9"
-        model = torch.load(f, map_location=device)
-        results = evaluate(
-            model=model,
-            tokenizer=tokenizer,
-            device=device,
-            bias_type="gender",
-            stereo_data=stereo_data,
-            blimp_data=blimp_data,
-            crowspairs_data=crowspairs_data,
-        )
+        if "_seed_10_" in f.stem:
+            name = f.stem
+            # Find other split
+            s = name.split(".pt")
+            model_name = s[0]
+            seed = "9"
+            model = torch.load(f, map_location=device)
+            results = evaluate(
+                model=model,
+                tokenizer=tokenizer,
+                device=device,
+                bias_type="gender",
+                stereo_data=stereo_data,
+                blimp_data=blimp_data,
+                crowspairs_data=crowspairs_data,
+            )
 
         results["model"] = model_name
         results["seed"] = seed
