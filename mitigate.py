@@ -88,7 +88,6 @@ def fine_tune(config: MitigationConfig):
             EarlyStopping(monitor="val_loss", patience=10, mode="min"),
         ],
     )
-
     trainer.fit(model, train_dataloader, val_dataloader)
     _save_checkpoint(config, filename)
 
