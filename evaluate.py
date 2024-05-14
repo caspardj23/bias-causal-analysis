@@ -197,7 +197,8 @@ def evaluate_save_results():
     list_of_files = list(checkpoint_path.glob("*.pt"))
     for f in list_of_files:
         name = f.stem
-        s = name.split("_seed_")
+        # Find other split
+        s = name.split(".pt")
         model_name = s[0]
         seed = "9"
         model = torch.load(f, map_location=device)
