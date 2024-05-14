@@ -89,7 +89,7 @@ def fine_tune(config: MitigationConfig):
         ],
     )
     trainer.fit(model, train_dataloader, val_dataloader)
-    _save_checkpoint(config, filename)
+    # _save_checkpoint(config, filename)
 
 
 def _save_checkpoint(config: MitigationConfig, filename: str):
