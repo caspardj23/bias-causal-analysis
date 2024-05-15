@@ -196,7 +196,7 @@ def evaluate_save_results():
     checkpoint_path = Path("/content/drive/My Drive/Mitigation_data/GroNLP")
     list_of_files = list(checkpoint_path.glob("*.pt"))
     for f in list_of_files:
-        if "_seed_10_" in f.stem:
+        if "_seed_11_" in f.stem:
             name = f.stem
             # Find other split
             s = name.split(".pt")
@@ -213,14 +213,14 @@ def evaluate_save_results():
                 crowspairs_data=crowspairs_data,
             )
 
-        results["model"] = model_name
-        results["seed"] = seed
-        print(results)
-        # previous_results = load_results(model_name=model_name, seed=seed)
-        # print(previous_results)
-        # previous_results.update(results)
-        # print(previous_results)
-        save_results(results, model_name=model_name, seed=seed)
+            results["model"] = model_name
+            results["seed"] = seed
+            print(results)
+            # previous_results = load_results(model_name=model_name, seed=seed)
+            # print(previous_results)
+            # previous_results.update(results)
+            # print(previous_results)
+            save_results(results, model_name=model_name, seed=seed)
 
 
 def mask_from_components(filepath):
