@@ -144,7 +144,7 @@ def evaluate(
 def save_results(results, model_name, seed):
     with open(
         Path(
-            f"/content/drive/My Drive/Mitigation_data/GroNLP/Evaluate{model_name}_{seed}.json"
+            f"/content/drive/My Drive/Mitigation_data/GroNLP/Evaluate/{model_name}_{seed}.json"
         ),
         "w",
     ) as f:
@@ -152,7 +152,7 @@ def save_results(results, model_name, seed):
     print(
         "Succesfully saved results at: ",
         Path(
-            f"/content/drive/My Drive/Mitigation_data/GroNLP/Evaluate{model_name}_{seed}.json"
+            f"/content/drive/My Drive/Mitigation_data/GroNLP/Evaluate/{model_name}_{seed}.json"
         ),
     )
 
@@ -160,7 +160,7 @@ def save_results(results, model_name, seed):
 def load_results(model_name, seed):
     with open(
         Path(
-            f"/content/drive/My Drive/Mitigation_data/GroNLP/Evaluate{model_name}_{seed}.json"
+            f"/content/drive/My Drive/Mitigation_data/GroNLP/Evaluate/{model_name}_{seed}.json"
         ),
         "r",
     ) as f:
