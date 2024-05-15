@@ -148,7 +148,7 @@ if __name__ == "__main__":
     print(len(val_dataloader.dataset.data))
     for batch in train_dataloader:
         X, Xc, y = batch
-        print(X[0] + " he")
-        print(X[0] + " she")
+        print(X[0] + " hij")
+        print(X[0] + " ze")
         print(y[0].item())
         break
