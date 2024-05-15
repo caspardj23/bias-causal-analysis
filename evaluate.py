@@ -196,7 +196,7 @@ def evaluate_save_results():
     checkpoint_path = Path("/content/drive/My Drive/Mitigation_data/GroNLP")
     list_of_files = list(checkpoint_path.glob("*.pt"))
     for f in list_of_files:
-        if "_seed_11_" in f.stem:
+        if "_seed_12_" in f.stem:
             name = f.stem
             # Find other split
             s = name.split(".pt")
