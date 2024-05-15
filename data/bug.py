@@ -10,8 +10,8 @@ from torch.utils.data import Dataset, DataLoader
 from random import shuffle, sample
 
 
-# FILE_NAME = "gold_BUG_translated_CDA_new.csv"
-FILE_NAME = "bug_balanced.csv"
+FILE_NAME = "gold_BUG_translated_CDA_new.csv"
+# FILE_NAME = "bug_balanced.csv"
 COLUMNS = [
     # "profession",
     # "g",
