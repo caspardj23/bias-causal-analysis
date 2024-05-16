@@ -3,7 +3,7 @@ seed: 24
 model:
   name: GroNLP/gpt2-small-dutch
   components_path: components
-  components: random
+  components: all
 
 data:
   path: data
