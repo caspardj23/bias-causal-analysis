@@ -1,9 +1,9 @@
-seed: 54
+seed: 51
 
 model:
   name: GroNLP/gpt2-small-dutch
   components_path: components
-  components: attn_layers_all
+  components: all
 
 data:
   path: data
