@@ -1,9 +1,9 @@
-seed: 12
+seed: 30
 
 model:
   name: GroNLP/gpt2-small-dutch
   components_path: components
-  components: random2
+  components: attn_heads_cma_dutch_top10
 
 data:
   path: data
