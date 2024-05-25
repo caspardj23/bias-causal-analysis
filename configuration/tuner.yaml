@@ -1,4 +1,4 @@
-seed: 50
+seed: 51
 
 model:
   name: GroNLP/gpt2-small-dutch
