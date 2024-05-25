@@ -3,7 +3,7 @@ seed: 50
 model:
   name: GroNLP/gpt2-small-dutch
   components_path: components
-  components: all
+  components: attn_layers_all
 
 data:
   path: data
