@@ -1,9 +1,9 @@
 seed: 9
 
-model: GroNLP/gpt2-small-dutch
-attn_heads: 10
+model: yhavinga/gpt2-medium-dutch
+attn_heads: 16
 results_path: results/cma
-  
+
 data:
   path: data
   name: professions
