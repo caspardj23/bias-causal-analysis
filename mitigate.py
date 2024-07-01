@@ -72,7 +72,7 @@ def fine_tune(config: MitigationConfig):
     filename = f"{config.model.name}_{config.model.components}_seed_{config.seed}"
     if filename.startswith("yhavinga/"):
         filename = filename[len("yhavinga/") :]
-    print("Model Config: ", model.config)
+    # print("Model Config: ", model.config)
 
     trainer = pl.Trainer(
         accumulate_grad_batches=4,
