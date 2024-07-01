@@ -68,13 +68,17 @@ def fine_tune(config: MitigationConfig):
     components_file = Path(config.model.components_path) / (
         config.model.components + ".yaml"
     )
+    print("check4")
     with open(components_file, "r") as f:
         components = yaml.safe_load(f)
     logging.info(f"Components: {components}")
+    print("check5")
     model = GPT2FineTuningModule(config=config, components=components)
+    print("check6")
     filename = f"{config.model.name}_{config.model.components}_seed_{config.seed}"
     if filename.startswith("yhavinga/"):
         filename = filename[len("yhavinga/") :]
+    print("check7")
     trainer = pl.Trainer(
         accumulate_grad_batches=4,
         max_epochs=config.tuner.epochs,
