@@ -7,7 +7,12 @@ from functools import cached_property
 
 
 from configuration.tuner import MitigationConfig
-from transformers import GPT2LMHeadModel, GPT2Tokenizer, get_linear_schedule_with_warmup
+from transformers import (
+    GPT2LMHeadModel,
+    GPT2Tokenizer,
+    get_linear_schedule_with_warmup,
+    GPT2Config,
+)
 
 
 LOGGER = logging.getLogger(__name__)
@@ -31,7 +36,7 @@ class GPT2FineTuningModule(pl.LightningModule):
         self.model = GPT2LMHeadModel.from_pretrained(config.model.name)
         self.tokenizer = GPT2Tokenizer.from_pretrained(config.model.name)
         self.tokenizer.add_special_tokens({"pad_token": "[PAD]"})
-        self.config = config
+        self.config = GPT2Config.from_pretrained(config.model.name)
         self.components = components
 
     def training_step(self, batch, batch_idx):

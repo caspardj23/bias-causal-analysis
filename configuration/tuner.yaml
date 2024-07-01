@@ -18,7 +18,7 @@ tuner:
   eps: 1e-8
   momentum: 0.9
   weight_decay: 1E-4
-  batch_size: 32
+  batch_size: 16
   checkpoint_path: checkpoints
   results_path: /content/drive/My Drive/Mitigation_data
   ID_path: ID2_100ep
