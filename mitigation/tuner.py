@@ -36,7 +36,7 @@ class GPT2FineTuningModule(pl.LightningModule):
         self.model = GPT2LMHeadModel.from_pretrained(config.model.name)
         self.tokenizer = GPT2Tokenizer.from_pretrained(config.model.name)
         self.tokenizer.add_special_tokens({"pad_token": "[PAD]"})
-        self.config = GPT2Config.from_pretrained(config.model.name)
+        self.config = config
         self.components = components
 
     def training_step(self, batch, batch_idx):
