@@ -88,6 +88,9 @@ class GPT2FineTuningModule(pl.LightningModule):
                 self.tokenizer.eos_token_id,
                 input_ids,
             )
+            print(f"Max token ID: {input_ids.max().item()}")
+            print(f"Tokenizer vocab size: {len(self.tokenizer)}")
+            print(f"Model vocab size: {self.model.config.vocab_size}")
             outputs = self.model(
                 input_ids, attention_mask=attention_mask, labels=labels
             )
