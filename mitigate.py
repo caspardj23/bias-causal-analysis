@@ -55,30 +55,24 @@ def fine_tune(config: MitigationConfig):
     device = get_device()
     LOGGER.info(f"Using device: {device}")
 
-    print("check1")
     bug = BUGBalanced(
         data_path=config.data.path, val_split=config.data.val_size, seed=config.seed
     )
-    print("check2")
     train_dataloader, val_dataloader = bug.get_dataloaders(
         batch_size=config.tuner.batch_size
     )
 
-    print("check3")
     components_file = Path(config.model.components_path) / (
         config.model.components + ".yaml"
     )
-    print("check4")
     with open(components_file, "r") as f:
         components = yaml.safe_load(f)
     logging.info(f"Components: {components}")
-    print("check5")
     model = GPT2FineTuningModule(config=config, components=components)
-    print("check6")
     filename = f"{config.model.name}_{config.model.components}_seed_{config.seed}"
     if filename.startswith("yhavinga/"):
         filename = filename[len("yhavinga/") :]
-    print("check7")
+    print(model.config)
     trainer = pl.Trainer(
         accumulate_grad_batches=4,
         max_epochs=config.tuner.epochs,
@@ -96,9 +90,7 @@ def fine_tune(config: MitigationConfig):
             EarlyStopping(monitor="val_loss", patience=10, mode="min"),
         ],
     )
-    print("check8")
     trainer.fit(model, train_dataloader, val_dataloader)
-    print("check9")
     _save_checkpoint(config, filename)
 
 

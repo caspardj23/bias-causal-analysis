@@ -75,22 +75,37 @@ class GPT2FineTuningModule(pl.LightningModule):
             raise e
 
     def validation_step(self, batch, batch_idx):
-        X, y = batch
-        inputs = self.tokenizer(X, padding=True, return_tensors="pt")
-        input_ids = inputs["input_ids"].to(self.model.device)
-        attention_mask = inputs["attention_mask"].to(self.model.device)
-        labels = torch.where(input_ids == self.tokenizer.pad_token_id, -100, input_ids)
-        input_ids = torch.where(
-            input_ids == self.tokenizer.pad_token_id,
-            self.tokenizer.eos_token_id,
-            input_ids,
-        )
-        outputs = self.model(input_ids, attention_mask=attention_mask, labels=labels)
-        loss = outputs.loss
-        self.log(
-            "val_loss", loss, on_step=False, on_epoch=True, prog_bar=True, logger=True
-        )
-        return loss
+        try:
+            X, y = batch
+            inputs = self.tokenizer(X, padding=True, return_tensors="pt")
+            input_ids = inputs["input_ids"].to(self.model.device)
+            attention_mask = inputs["attention_mask"].to(self.model.device)
+            labels = torch.where(
+                input_ids == self.tokenizer.pad_token_id, -100, input_ids
+            )
+            input_ids = torch.where(
+                input_ids == self.tokenizer.pad_token_id,
+                self.tokenizer.eos_token_id,
+                input_ids,
+            )
+            outputs = self.model(
+                input_ids, attention_mask=attention_mask, labels=labels
+            )
+            loss = outputs.loss
+            self.log(
+                "val_loss",
+                loss,
+                on_step=False,
+                on_epoch=True,
+                prog_bar=True,
+                logger=True,
+            )
+            return loss
+        except Exception as e:
+            print(f"Error in training step: {e}")
+            print(f"Input shape: {input_ids.shape}")
+            print(f"Attention mask shape: {attention_mask.shape}")
+            raise e
 
     def on_before_optimizer_step(self, optimizer):
         """
