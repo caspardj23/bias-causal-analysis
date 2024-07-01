@@ -69,14 +69,14 @@ class CMA:
         self.config = config
         self.device = device
 
-        """GPT2-small-dutch GroNLP"""
+        """GPT2-medium-dutch yhavinga"""
         self.model = HookedTransformer.from_pretrained(config.model, device=device)
         self.model.tokenizer = AutoTokenizer.from_pretrained(config.model)
         self.model.tokenizer.pad_token = self.model.tokenizer.eos_token
         self.model.cfg.use_attn_result = True
         self.she_token = self.model.tokenizer.encode(" ze")[0]
         self.he_token = self.model.tokenizer.encode(" hij")[0]
-        print("GPT2-small-dutch Dutch GroNLP config: ", self.model.cfg)
+        print("GPT2-medium-dutch Dutch yhavinga config: ", self.model.cfg)
 
     def indirect_effects(self, dataloader):
         self.model.eval()
