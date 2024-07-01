@@ -55,13 +55,16 @@ def fine_tune(config: MitigationConfig):
     device = get_device()
     LOGGER.info(f"Using device: {device}")
 
+    print("check1")
     bug = BUGBalanced(
         data_path=config.data.path, val_split=config.data.val_size, seed=config.seed
     )
+    print("check2")
     train_dataloader, val_dataloader = bug.get_dataloaders(
         batch_size=config.tuner.batch_size
     )
 
+    print("check3")
     components_file = Path(config.model.components_path) / (
         config.model.components + ".yaml"
     )
