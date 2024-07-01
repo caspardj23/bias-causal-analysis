@@ -48,72 +48,52 @@ class GPT2FineTuningModule(pl.LightningModule):
         """
         Training step for the model.
         """
-        try:
-            X, y = batch
-            inputs = self.tokenizer(X, padding=True, return_tensors="pt")
-            input_ids = inputs["input_ids"].to(self.device)
-            attention_mask = inputs["attention_mask"].to(self.device)
-            labels = torch.where(
-                input_ids == self.tokenizer.pad_token_id, -100, input_ids
-            )
-            input_ids = torch.where(
-                input_ids == self.tokenizer.pad_token_id,
-                self.tokenizer.eos_token_id,
-                input_ids,
-            )
-            outputs = self.model(
-                input_ids, attention_mask=attention_mask, labels=labels
-            )
-            loss = outputs.loss
-            self.log(
-                "train_loss",
-                loss,
-                on_step=False,
-                on_epoch=True,
-                prog_bar=True,
-                logger=True,
-            )
-        except Exception as e:
-            print(f"Error in training step: {e}")
-            print(f"Input shape: {input_ids.shape}")
-            print(f"Attention mask shape: {attention_mask.shape}")
-            raise e
+        X, y = batch
+        inputs = self.tokenizer(X, padding=True, return_tensors="pt")
+        input_ids = inputs["input_ids"].to(self.device)
+        attention_mask = inputs["attention_mask"].to(self.device)
+        labels = torch.where(input_ids == self.tokenizer.pad_token_id, -100, input_ids)
+        input_ids = torch.where(
+            input_ids == self.tokenizer.pad_token_id,
+            self.tokenizer.eos_token_id,
+            input_ids,
+        )
+        outputs = self.model(input_ids, attention_mask=attention_mask, labels=labels)
+        loss = outputs.loss
+        self.log(
+            "train_loss",
+            loss,
+            on_step=False,
+            on_epoch=True,
+            prog_bar=True,
+            logger=True,
+        )
 
     def validation_step(self, batch, batch_idx):
-        try:
-            X, y = batch
-            inputs = self.tokenizer(X, padding=True, return_tensors="pt")
-            input_ids = inputs["input_ids"].to(self.model.device)
-            attention_mask = inputs["attention_mask"].to(self.model.device)
-            labels = torch.where(
-                input_ids == self.tokenizer.pad_token_id, -100, input_ids
-            )
-            input_ids = torch.where(
-                input_ids == self.tokenizer.pad_token_id,
-                self.tokenizer.eos_token_id,
-                input_ids,
-            )
-            # print(f"Max token ID: {input_ids.max().item()}")
-            # print(f"Tokenizer vocab size: {len(self.tokenizer)}")
-            # print(f"Model vocab size: {self.model.config.vocab_size}")
-            outputs = self.model(
-                input_ids, attention_mask=attention_mask, labels=labels
-            )
-            loss = outputs.loss
-            self.log(
-                "val_loss",
-                loss,
-                on_step=False,
-                on_epoch=True,
-                prog_bar=True,
-                logger=True,
-            )
-            return loss
-        except Exception as e:
-            print(f"Error in training step: {e}")
-            print(f"Input shape: {input_ids.shape}")
-            print(f"Attention mask shape: {attention_mask.shape}")
-            raise e
+        X, y = batch
+        inputs = self.tokenizer(X, padding=True, return_tensors="pt")
+        input_ids = inputs["input_ids"].to(self.model.device)
+        attention_mask = inputs["attention_mask"].to(self.model.device)
+        labels = torch.where(input_ids == self.tokenizer.pad_token_id, -100, input_ids)
+        input_ids = torch.where(
+            input_ids == self.tokenizer.pad_token_id,
+            self.tokenizer.eos_token_id,
+            input_ids,
+        )
+        # print(f"Max token ID: {input_ids.max().item()}")
+        # print(f"Tokenizer vocab size: {len(self.tokenizer)}")
+        # print(f"Model vocab size: {self.model.config.vocab_size}")
+        outputs = self.model(input_ids, attention_mask=attention_mask, labels=labels)
+        loss = outputs.loss
+        self.log(
+            "val_loss",
+            loss,
+            on_step=False,
+            on_epoch=True,
+            prog_bar=True,
+            logger=True,
+        )
+        return loss
 
     def on_before_optimizer_step(self, optimizer):
         """
