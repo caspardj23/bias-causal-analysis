@@ -36,6 +36,11 @@ class GPT2FineTuningModule(pl.LightningModule):
         self.model = GPT2LMHeadModel.from_pretrained(config.model.name)
         self.tokenizer = GPT2Tokenizer.from_pretrained(config.model.name)
         self.tokenizer.add_special_tokens({"pad_token": "[PAD]"})
+
+        self.model.resize_token_embeddings(len(self.tokenizer))
+        print(f"Tokenizer vocab size after resizing: {len(self.tokenizer)}")
+        print(f"Model vocab size after resizing: {self.model.config.vocab_size}")
+
         self.config = config
         self.components = components
 
