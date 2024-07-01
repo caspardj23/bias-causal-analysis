@@ -1,7 +1,7 @@
 seed: 74
 
 model:
-  name: GroNLP/gpt2-small-dutch
+  name: yhavinga/gpt2-medium-dutch
   components_path: components
   components: attn_layers_all
 
