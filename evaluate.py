@@ -144,7 +144,7 @@ def evaluate(
 def save_results(results, model_name, seed):
     with open(
         Path(
-            f"/content/drive/My Drive/Mitigation_data/GroNLP/Evaluate/{model_name}_{seed}.json"
+            f"/content/drive/My Drive/Mitigation_data/yhavinga/Evaluate/{model_name}_{seed}.json"
         ),
         "w",
     ) as f:
@@ -152,7 +152,7 @@ def save_results(results, model_name, seed):
     print(
         "Succesfully saved results at: ",
         Path(
-            f"/content/drive/My Drive/Mitigation_data/GroNLP/Evaluate/{model_name}_{seed}.json"
+            f"/content/drive/My Drive/Mitigation_data/yhavinga/Evaluate/{model_name}_{seed}.json"
         ),
     )
 
@@ -160,7 +160,7 @@ def save_results(results, model_name, seed):
 def load_results(model_name, seed):
     with open(
         Path(
-            f"/content/drive/My Drive/Mitigation_data/GroNLP/Evaluate/{model_name}_{seed}.json"
+            f"/content/drive/My Drive/Mitigation_data/yhavinga/Evaluate/{model_name}_{seed}.json"
         ),
         "r",
     ) as f:
@@ -173,8 +173,8 @@ def evaluate_save_results():
     blimp_data = "data/blimp"
     crowspairs_data = "data/crows_pairs_revised.csv"
     device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
-    model = GPT2LMHeadModel.from_pretrained("GroNLP/gpt2-small-dutch").to(device)
-    tokenizer = GPT2Tokenizer.from_pretrained("GroNLP/gpt2-small-dutch")
+    model = GPT2LMHeadModel.from_pretrained("yhavinga/gpt2-medium-dutch").to(device)
+    tokenizer = GPT2Tokenizer.from_pretrained("yhavinga/gpt2-medium-dutch")
     model.eval()
     results = evaluate(
         model=model,
@@ -185,15 +185,15 @@ def evaluate_save_results():
         blimp_data=blimp_data,
         crowspairs_data=crowspairs_data,
     )
-    results["model"] = "gpt2-small-dutch_baseline"
+    results["model"] = "gpt2-medium-dutch_baseline"
     results["seed"] = "9"
     print(results)
     # previous_results = load_results("gpt2-small-dutch_baseline", 0)
     # print(previous_results)
     # previous_results.update(results)
     # print(previous_results)
-    save_results(results, "gpt2-small-dutch_baseline", 0)
-    checkpoint_path = Path("/content/drive/My Drive/Mitigation_data/GroNLP")
+    save_results(results, "gpt2-medium-dutch_baseline", 0)
+    checkpoint_path = Path("/content/drive/My Drive/Mitigation_data/yhavinga")
     list_of_files = list(checkpoint_path.glob("*.pt"))
     for f in list_of_files:
         if "seed_7" in f.stem:
@@ -244,7 +244,7 @@ def evaluate_cma():
     )
     cma_config = CMAConfig(
         seed=9,
-        model="gpt2-small",
+        model="gpt2-medium",
         attn_heads=10,
         results_path="results/cma",
         data=data_config,
