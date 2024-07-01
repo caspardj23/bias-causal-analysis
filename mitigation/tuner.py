@@ -68,6 +68,7 @@ class GPT2FineTuningModule(pl.LightningModule):
             prog_bar=True,
             logger=True,
         )
+        return loss
 
     def validation_step(self, batch, batch_idx):
         X, y = batch
