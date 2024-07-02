@@ -196,31 +196,31 @@ def evaluate_save_results():
     checkpoint_path = Path("/content/drive/My Drive/Mitigation_data/yhavinga")
     list_of_files = list(checkpoint_path.glob("*.pt"))
     for f in list_of_files:
-        if "seed_7" in f.stem:
-            name = f.stem
-            # Find other split
-            s = name.split(".pt")
-            model_name = s[0]
-            seed = "9"
-            model = torch.load(f, map_location=device)
-            results = evaluate(
-                model=model,
-                tokenizer=tokenizer,
-                device=device,
-                bias_type="gender",
-                stereo_data=stereo_data,
-                blimp_data=blimp_data,
-                crowspairs_data=crowspairs_data,
-            )
+        # if "seed_7" in f.stem:
+        name = f.stem
+        # Find other split
+        s = name.split(".pt")
+        model_name = s[0]
+        seed = "9"
+        model = torch.load(f, map_location=device)
+        results = evaluate(
+            model=model,
+            tokenizer=tokenizer,
+            device=device,
+            bias_type="gender",
+            stereo_data=stereo_data,
+            blimp_data=blimp_data,
+            crowspairs_data=crowspairs_data,
+        )
 
-            results["model"] = model_name
-            results["seed"] = seed
-            print(results)
-            # previous_results = load_results(model_name=model_name, seed=seed)
-            # print(previous_results)
-            # previous_results.update(results)
-            # print(previous_results)
-            save_results(results, model_name=model_name, seed=seed)
+        results["model"] = model_name
+        results["seed"] = seed
+        print(results)
+        # previous_results = load_results(model_name=model_name, seed=seed)
+        # print(previous_results)
+        # previous_results.update(results)
+        # print(previous_results)
+        save_results(results, model_name=model_name, seed=seed)
 
 
 def mask_from_components(filepath):
