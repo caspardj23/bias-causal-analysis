@@ -1,5 +1,5 @@
 attn_layers:
-  all: False
+  all: True
   subset:
     - 8
     - 9
