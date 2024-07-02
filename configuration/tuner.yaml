@@ -3,7 +3,7 @@ seed: 75
 model:
   name: yhavinga/gpt2-medium-dutch
   components_path: components
-  components: random_havinga
+  components: attn_layers
 
 data:
   path: data
