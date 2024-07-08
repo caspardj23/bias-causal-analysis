@@ -3,7 +3,7 @@ seed: 75
 model:
   name: yhavinga/gpt2-medium-dutch
   components_path: components
-  components: attn_heads_cma_havinga_20
+  components: attn_heads_cma_havinga
 
 data:
   path: data
@@ -21,5 +21,4 @@ tuner:
   batch_size: 16
   checkpoint_path: checkpoints
   results_path: /content/drive/My Drive/Mitigation_data
-  ID_path: ID_1.20
-  
+  ID_path: ID_2.1  
