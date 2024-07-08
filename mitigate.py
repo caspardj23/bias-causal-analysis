@@ -69,7 +69,7 @@ def fine_tune(config: MitigationConfig):
         components = yaml.safe_load(f)
     logging.info(f"Components: {components}")
     model = GPT2FineTuningModule(config=config, components=components)
-    filename = f"{config.model.name}_{config.model.components}_seed_{config.seed}"
+    filename = f"{config.model.name}_{config.model.components}_{config.tuner.ID_path}_seed_{config.seed}"
     if filename.startswith("yhavinga/"):
         filename = filename[len("yhavinga/") :]
     # print("Model Config: ", model.config)
