@@ -86,8 +86,8 @@ def fine_tune(config: MitigationConfig):
                 dirpath=config.tuner.checkpoint_path,
                 filename=filename + "_{epoch:03d}_{val_loss:.2f}",
                 # save_top_k = -1 for saving all models
-                save_top_k=1,
-                every_n_epochs=1,
+                save_top_k=-1,
+                every_n_epochs=5,
             ),
             EarlyStopping(monitor="val_loss", patience=10, mode="min"),
         ],
