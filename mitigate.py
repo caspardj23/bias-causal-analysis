@@ -86,8 +86,8 @@ def fine_tune(config: MitigationConfig):
                 dirpath=config.tuner.checkpoint_path,
                 filename=filename + "_{epoch:03d}_{val_loss:.2f}",
                 # save_top_k = -1 for saving all models
-                save_top_k=-1,
-                every_n_epochs=5,
+                save_top_k=1,
+                every_n_epochs=1,
             ),
             EarlyStopping(monitor="val_loss", patience=10, mode="min"),
         ],
@@ -115,7 +115,7 @@ def _save_checkpoint(config: MitigationConfig, filename: str):
     list_of_files = list(checkpoint_path.glob("*.ckpt"))
     print("list of files: ", list_of_files)
     for file in list_of_files:
-        epoch_number = get_epoch_count(file)
+        # epoch_number = get_epoch_count(file)
         # if file.stem.startswith(filename):
         LOGGER.info(f"Saving checkpoint: {file}")
         ft_model = GPT2FineTuningModule.load_from_checkpoint(
@@ -124,14 +124,14 @@ def _save_checkpoint(config: MitigationConfig, filename: str):
         torch.save(
             ft_model.model,
             Path(config.tuner.results_path)
-            / (filename + "_epochs" + epoch_number + ".pt"),
-            # / (filename + "_epochs" + str(config.tuner.epochs) + ".pt"),
+            # / (filename + "_epochs" + epoch_number + ".pt"),
+            / (filename + "_epochs" + str(config.tuner.epochs) + ".pt"),
         )
         print(
             "Model succesfully saved at ",
             Path(config.tuner.results_path)
-            / (filename + "_epochs" + epoch_number + ".pt"),
-            # / (filename + "_epochs" + str(config.tuner.epochs) + ".pt"),
+            # / (filename + "_epochs" + epoch_number + ".pt"),
+            / (filename + "_epochs" + str(config.tuner.epochs) + ".pt"),
         )
 
 
