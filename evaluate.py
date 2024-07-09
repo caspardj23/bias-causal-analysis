@@ -194,7 +194,7 @@ def evaluate_save_results():
     # print(previous_results)
     save_results(results, "gpt2-medium-dutch_baseline", 0)
     checkpoint_path = Path(
-        "/content/drive/My Drive/Mitigation_data/yhavinga_attn_heads"
+        "/content/drive/My Drive/Mitigation_data/yhavinga_checkpoints"
     )
     list_of_files = list(checkpoint_path.glob("*.pt"))
     for f in list_of_files:
