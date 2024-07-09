@@ -193,9 +193,7 @@ def evaluate_save_results():
     # previous_results.update(results)
     # print(previous_results)
     save_results(results, "gpt2-medium-dutch_baseline", 0)
-    checkpoint_path = Path(
-        "/content/drive/My Drive/Mitigation_data/yhavinga_checkpoints"
-    )
+    checkpoint_path = Path("/content/drive/My Drive/Mitigation_data/yhavinga_extra")
     list_of_files = list(checkpoint_path.glob("*.pt"))
     for f in list_of_files:
         # if "layers" in f.stem or "all" in f.stem:
