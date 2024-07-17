@@ -160,7 +160,7 @@ def save_results(results, model_name, seed):
 def load_results(model_name, seed):
     with open(
         Path(
-            f"/content/drive/My Drive/Mitigation_data/yhavinga/Evaluate/{model_name}_{seed}.json"
+            f"/content/drive/My Drive/Mitigation_data/yhavinga_checkpoints_extra2/Evaluate/{model_name}_{seed}.json"
         ),
         "r",
     ) as f:
