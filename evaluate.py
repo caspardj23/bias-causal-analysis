@@ -144,7 +144,7 @@ def evaluate(
 def save_results(results, model_name, seed):
     with open(
         Path(
-            f"/content/drive/My Drive/Mitigation_data/yhavinga_checkpoints_extra2/Evaluate/{model_name}_{seed}.json"
+            f"/content/drive/My Drive/Mitigation_data/17juli_yhavinga_checkpoints_extra/Evaluate/{model_name}_{seed}.json"
         ),
         "w",
     ) as f:
@@ -152,7 +152,7 @@ def save_results(results, model_name, seed):
     print(
         "Succesfully saved results at: ",
         Path(
-            f"/content/drive/My Drive/Mitigation_data/yhavinga_checkpoints_extra2/Evaluate/{model_name}_{seed}.json"
+            f"/content/drive/My Drive/Mitigation_data/17juli_yhavinga_checkpoints_extra/Evaluate/{model_name}_{seed}.json"
         ),
     )
 
@@ -160,7 +160,7 @@ def save_results(results, model_name, seed):
 def load_results(model_name, seed):
     with open(
         Path(
-            f"/content/drive/My Drive/Mitigation_data/yhavinga_checkpoints_extra2/Evaluate/{model_name}_{seed}.json"
+            f"/content/drive/My Drive/Mitigation_data/17juli_yhavinga_checkpoints_extra/Evaluate/{model_name}_{seed}.json"
         ),
         "r",
     ) as f:
@@ -194,7 +194,7 @@ def evaluate_save_results():
     # print(previous_results)
     save_results(results, "gpt2-medium-dutch_baseline", 0)
     checkpoint_path = Path(
-        "/content/drive/My Drive/Mitigation_data/yhavinga_checkpoints_extra2"
+        "/content/drive/My Drive/Mitigation_data/17juli_yhavinga_checkpoints_extra"
     )
     list_of_files = list(checkpoint_path.glob("*.pt"))
     for f in list_of_files:
