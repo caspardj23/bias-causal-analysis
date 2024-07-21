@@ -69,7 +69,9 @@ def fine_tune(config: MitigationConfig):
         components = yaml.safe_load(f)
     logging.info(f"Components: {components}")
     model = GPT2FineTuningModule(config=config, components=components)
-    filename = f"{config.model.name}_{config.model.components}_{config.tuner.ID_path}_seed_{config.seed}"
+    # filename = f"{config.model.name}_{config.model.components}_{config.tuner.ID_path}_seed_{config.seed}"
+    filename = f"{config.model.name}_{config.model.components}_seed_{config.seed}"
+
     if filename.startswith("yhavinga/"):
         filename = filename[len("yhavinga/") :]
     # print("Model Config: ", model.config)
@@ -115,7 +117,7 @@ def _save_checkpoint(config: MitigationConfig, filename: str):
     list_of_files = list(checkpoint_path.glob("*.ckpt"))
     print("list of files: ", list_of_files)
     for file in list_of_files:
-        epoch_number = get_epoch_count(file)
+        # epoch_number = get_epoch_count(file)
         # if file.stem.startswith(filename):
         LOGGER.info(f"Saving checkpoint: {file}")
         ft_model = GPT2FineTuningModule.load_from_checkpoint(
@@ -124,14 +126,14 @@ def _save_checkpoint(config: MitigationConfig, filename: str):
         torch.save(
             ft_model.model,
             Path(config.tuner.results_path)
-            / (filename + "_epochs" + epoch_number + ".pt"),
-            # / (filename + "_epochs" + str(config.tuner.epochs) + ".pt"),
+            # / (filename + "_epochs" + epoch_number + ".pt"),
+            / (filename + "_epochs" + str(config.tuner.epochs) + ".pt"),
         )
         print(
             "Model succesfully saved at ",
             Path(config.tuner.results_path)
-            / (filename + "_epochs" + epoch_number + ".pt"),
-            # / (filename + "_epochs" + str(config.tuner.epochs) + ".pt"),
+            # / (filename + "_epochs" + epoch_number + ".pt"),
+            / (filename + "_epochs" + str(config.tuner.epochs) + ".pt"),
         )
 
 
