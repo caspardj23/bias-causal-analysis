@@ -108,6 +108,8 @@ def main(config: DiffMaskConfig) -> None:
 
     location = dm.location.detach().cpu().tolist()
     print("mask: ", expected_mask(location=location))
+    print("location: ", location)
+    print(results_file(config))
     save_json(
         {"location": location, "mask": expected_mask(location=location)},
         results_file(config),
