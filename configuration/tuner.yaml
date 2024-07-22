@@ -3,7 +3,7 @@ seed: 92
 model:
   name: yhavinga/gpt2-medium-dutch
   components_path: components
-  components: attn_layers_last
+  components: attn_heads_diffmask_20epochs.yaml
 
 data:
   path: data
