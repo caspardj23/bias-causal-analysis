@@ -107,6 +107,7 @@ def main(config: DiffMaskConfig) -> None:
     trainer.fit(dm, train_dataloader, val_dataloader)
 
     location = dm.location.detach().cpu().tolist()
+    print("mask: ", expected_mask(location=location))
     save_json(
         {"location": location, "mask": expected_mask(location=location)},
         results_file(config),

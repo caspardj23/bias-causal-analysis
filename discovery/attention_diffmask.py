@@ -19,6 +19,15 @@ from transformer_lens import (
     FactoredMatrix,
     ActivationCache,
 )
+from transformers import AutoTokenizer
+
+
+"""Add dutch GPT2 models to transformer_lens."""
+transformer_lens.loading.OFFICIAL_MODEL_NAMES = (
+    transformer_lens.loading.OFFICIAL_MODEL_NAMES
+    + ["yhavinga/gpt2-medium-dutch"]
+    + ["GroNLP/gpt2-small-dutch"]
+)
 
 
 def attention_intervention_hook(
@@ -62,13 +71,14 @@ class AttentionDiffMask(DiffMask):
         self.config = config
         self.automatic_optimization = False
         self.model = HookedTransformer.from_pretrained(config.mask.model, device=device)
+        self.model.tokenizer = AutoTokenizer.from_pretrained(config.mask.model)
         self.model.cfg.use_attn_result = True
         self.location = torch.nn.Parameter(
             torch.zeros((self.model.cfg.n_layers, self.model.cfg.n_heads)),
             requires_grad=True,
         )
-        self.she_token = self.model.tokenizer.encode(" she")[0]
-        self.he_token = self.model.tokenizer.encode(" he")[0]
+        self.she_token = self.model.tokenizer.encode(" ze")[0]
+        self.he_token = self.model.tokenizer.encode(" hij")[0]
 
     def intervene(self, originals, counterfactuals, mask):
         """
