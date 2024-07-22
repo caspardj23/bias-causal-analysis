@@ -2,7 +2,7 @@ seed: 24
 
 mask:
   model: yhavinga/gpt2-medium-dutch
-  attn_heads: 16
+  attn_heads: 10
   mlps: 0
   
 data:
