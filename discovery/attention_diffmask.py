@@ -72,6 +72,7 @@ class AttentionDiffMask(DiffMask):
         self.automatic_optimization = False
         self.model = HookedTransformer.from_pretrained(config.mask.model, device=device)
         self.model.tokenizer = AutoTokenizer.from_pretrained(config.mask.model)
+        self.model.tokenizer.pad_token = self.model.tokenizer.eos_token
         self.model.cfg.use_attn_result = True
         self.location = torch.nn.Parameter(
             torch.zeros((self.model.cfg.n_layers, self.model.cfg.n_heads)),
