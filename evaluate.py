@@ -196,7 +196,7 @@ def evaluate_save_results():
     checkpoint_path = Path("/content/drive/My Drive/Mitigation_data/yhavinga_2_21_jul")
     list_of_files = list(checkpoint_path.glob("*.pt"))
     for f in list_of_files:
-        if "92" in f.stem:
+        if "92" in f.stem or "diffmask" in f.stem:
             name = f.stem
             # Find other split
             s = name.split(".pt")
